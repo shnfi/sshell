@@ -36,13 +36,13 @@ int main()
 			case 10 :
 				line += 1;
 				strcpy(command.data, "");
-				//command.data = NULL;
-				memset(command.data, 0, sizeof(command.data) * command.len);
+				command.len = 0;
+				memset(command.data, 0, sizeof(command.data));
 				break;
 
 			default : 
-				command.len += 1;
 				command.data[command.len] = (char) ch;
+				command.len += 1;
 				break;
 		}
 		
