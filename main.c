@@ -66,7 +66,7 @@ int main()
 				break;
 
 			default : 
-				mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
+				//mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
 				command.data[command.len] = (char) ch;
 				command.len += 1;
 				break;
