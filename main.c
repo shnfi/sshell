@@ -20,6 +20,7 @@ int main()
 {
 	initscr();
 	noecho();
+	keypad(stdscr, true);
 
 	int line = 0;
 	bool EXIT = false;
@@ -42,7 +43,7 @@ int main()
 				memset(command.data, 0, sizeof(command.data));
 				break;
 
-			case 127 : // 'backspace' key
+			case 263 : // 'backspace' key
 				if (command.len > 0)
 				{
 					mvdelch(line, sizeof(USERNAME) + 6 + command.len - 1);
@@ -52,8 +53,20 @@ int main()
 
 				break;
 
+			case 261 : // 'right arrow' key
+				break;
+
+			case 260 : // 'left arrow' key
+				break;
+
+			case 258 : // 'down arrow' key
+				break;
+
+			case 259 : // 'up arrow' key
+				break;
+
 			default : 
-				//mvprintw(1, 50, "%d", ch); // a line for finding the code of keys (delete me later!)
+				mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
 				command.data[command.len] = (char) ch;
 				command.len += 1;
 				break;
