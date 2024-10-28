@@ -45,7 +45,7 @@ int main()
 			case 127 : // 'backspace' key
 				if (command.len > 0)
 				{
-					mvdelch(line, command.len - 1);
+					mvdelch(line, sizeof(USERNAME) + 6 + command.len - 1);
 					command.data[command.len-1] = 0;
 					command.len -= 1;
 				}
