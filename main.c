@@ -19,6 +19,7 @@ typedef struct
 int main()
 {
 	initscr();
+	noecho();
 
 	int line = 0;
 	bool EXIT = false;
@@ -31,16 +32,28 @@ int main()
 		mvprintw(line, sizeof(USERNAME) + 6, "%s", command.data);
 		
 		int ch = getch();
+
 		switch (ch)
 		{
-			case 10 :
+			case 10 : // 'enter' key
 				line += 1;
 				strcpy(command.data, "");
 				command.len = 0;
 				memset(command.data, 0, sizeof(command.data));
 				break;
 
+			case 127 : // 'backspace' key
+				if (command.len > 0)
+				{
+					mvdelch(line, command.len - 1);
+					command.data[command.len-1] = 0;
+					command.len -= 1;
+				}
+
+				break;
+
 			default : 
+				//mvprintw(1, 50, "%d", ch); // a line for finding the code of keys (delete me later!)
 				command.data[command.len] = (char) ch;
 				command.len += 1;
 				break;
