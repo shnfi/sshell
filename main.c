@@ -29,8 +29,10 @@ int main()
 
 	do
 	{
-		mvprintw(line, 0, "(%s)$ ", USERNAME);
-		mvprintw(line, sizeof(USERNAME) + 6, "%s", command.data);
+		char date[20] = __DATE__;
+
+		mvprintw(line, 0, "[%s] (%s)$ ", date, USERNAME);
+		mvprintw(line, sizeof(USERNAME) + 20, "%s", command.data);
 		
 		int ch = getch();
 
@@ -46,7 +48,7 @@ int main()
 			case 263 : // 'backspace' key
 				if (command.len > 0)
 				{
-					mvdelch(line, sizeof(USERNAME) + 6 + command.len - 1);
+					mvdelch(line, sizeof(USERNAME) + 20 + command.len - 1);
 					command.data[command.len-1] = 0;
 					command.len -= 1;
 				}
