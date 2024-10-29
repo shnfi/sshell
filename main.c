@@ -32,17 +32,40 @@ int main()
 	{
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
-  		//printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  		//printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec); // a line for finding the date and time format specifiers (delete me later!)
 
 		mvprintw(line, 0, "[%02d:%02d:%02d] (%s)$ ", tm.tm_hour, tm.tm_min, tm.tm_sec, USERNAME);
-		mvprintw(line, sizeof(USERNAME) + 20, "%s", command.data);
+		mvprintw(line, sizeof(USERNAME) + 17, "%s", command.data);
 		
 		int ch = getch();
 
 		switch (ch)
 		{
 			case 10 : // 'enter' key
-				line += 1;
+				char *returning_output = malloc(BUFFER);
+				FILE *output;
+				char string[BUFFER];
+			
+				output = popen(command.data, "r");
+
+				int additional_line = 0;
+
+				if (output == NULL)
+				{
+					returning_output = "ERROR WHILE OPENING THE PIPE!";
+				}
+				else
+				{
+					printw("\n\n");
+					while(fgets(returning_output, BUFFER-1, output))
+					{
+						printw("%s", returning_output);
+						additional_line += 1;
+					}
+				}
+
+				line += additional_line + 3;
+				additional_line = 0;
 				strcpy(command.data, "");
 				command.len = 0;
 				memset(command.data, 0, sizeof(command.data));
@@ -51,7 +74,7 @@ int main()
 			case 263 : // 'backspace' key
 				if (command.len > 0)
 				{
-					mvdelch(line, sizeof(USERNAME) + 20 + command.len - 1);
+					mvdelch(line, sizeof(USERNAME) + 17 + command.len - 1);
 					command.data[command.len-1] = 0;
 					command.len -= 1;
 				}
