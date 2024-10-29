@@ -7,9 +7,11 @@
 # include <ncurses.h>
 
 # include "get_output.h"
+//# include "builtin_commands/clear.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
+#define ctrl(x) ((x) & 0x1f)
 
 typedef struct
 {
@@ -21,6 +23,8 @@ int main()
 {
 	initscr();
 	noecho();
+	raw();
+	scrollok(stdscr, true);
 	keypad(stdscr, true);
 
 	int line = 0;
@@ -57,10 +61,11 @@ int main()
 				else
 				{
 					printw("\n\n");
+
 					while(fgets(returning_output, BUFFER-1, output))
 					{
 						printw("%s", returning_output);
-						additional_line += 1;
+						additional_line += 1;						
 					}
 				}
 
@@ -81,6 +86,10 @@ int main()
 
 				break;
 
+			case ctrl('q') : // 'q' key
+				return 0;
+				break;
+
 			case 261 : // 'right arrow' key
 				break;
 
@@ -94,7 +103,7 @@ int main()
 				break;
 
 			default : 
-				//mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
+				mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
 				command.data[command.len] = (char) ch;
 				command.len += 1;
 				break;
