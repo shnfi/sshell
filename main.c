@@ -7,6 +7,7 @@
 # include <ncurses.h>
 
 # include "get_output.h"
+# include "builtin_commands/exit.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
@@ -27,7 +28,8 @@ int main()
 	keypad(stdscr, true);
 
 	int line = 0;
-	bool EXIT = false;
+	bool *EXIT = malloc(sizeof(bool));
+	*EXIT = false;
 
 	command_s command = { "", 0 };
 
@@ -86,7 +88,7 @@ int main()
 				break;
 
 			case ctrl('q') : // 'ctrl' key + 'q' key
-				EXIT = true;
+				exit_c(EXIT);
 				break;
 
 			case 261 : // 'right arrow' key
@@ -109,7 +111,7 @@ int main()
 		}
 		
 		refresh();
-	} while (!EXIT);
+	} while (!*EXIT);
 
 	endwin();
 
