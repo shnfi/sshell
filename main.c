@@ -7,11 +7,10 @@
 # include <ncurses.h>
 
 # include "get_output.h"
-//# include "builtin_commands/clear.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
-#define ctrl(x) ((x) & 0x1f)
+# define ctrl(x) ((x) & 0x1f)
 
 typedef struct
 {
@@ -87,7 +86,7 @@ int main()
 				break;
 
 			case ctrl('q') : // 'ctrl' key + 'q' key
-				return 0;
+				EXIT = true;
 				break;
 
 			case 261 : // 'right arrow' key
