@@ -1,4 +1,4 @@
-# Fishell
+# Sshell
 a simple shell written in C :)
 
 ## purpose ?
