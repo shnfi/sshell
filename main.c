@@ -2,6 +2,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <time.h>
 
 # include <ncurses.h>
 
@@ -29,9 +30,11 @@ int main()
 
 	do
 	{
-		char date[20] = __DATE__;
+		time_t t = time(NULL);
+  		struct tm tm = *localtime(&t);
+  		//printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-		mvprintw(line, 0, "[%s] (%s)$ ", date, USERNAME);
+		mvprintw(line, 0, "[%02d:%02d:%02d] (%s)$ ", tm.tm_hour, tm.tm_min, tm.tm_sec, USERNAME);
 		mvprintw(line, sizeof(USERNAME) + 20, "%s", command.data);
 		
 		int ch = getch();
