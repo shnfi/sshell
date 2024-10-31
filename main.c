@@ -7,7 +7,7 @@
 # include <ncurses.h>
 
 # include "get_output.h"
-# include "builtin_commands/exit.h"
+# include "builtin_commands/exit_c.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
