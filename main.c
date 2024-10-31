@@ -98,6 +98,10 @@ int main()
 				exit_c(EXIT);
 				break;
 
+			case ctrl('d') : // 'ctrl' key + 'q' key
+				exit_c(EXIT);
+				break;
+
 			case 261 : // 'right arrow' key
 				break;
 
