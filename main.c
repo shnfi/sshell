@@ -47,26 +47,33 @@ int main()
 		switch (ch)
 		{
 			case 10 : // 'enter' key
-				char *returning_output = malloc(BUFFER);
-				FILE *output;
-				char string[BUFFER];
-			
-				output = popen(command.data, "r");
+				int additional_line;
 
-				int additional_line = 0;
-
-				if (output == NULL)
+				if (strcmp(command.data, "exit") == 0)
 				{
-					returning_output = "ERROR WHILE OPENING THE PIPE!";
+					exit_c(EXIT);
 				}
 				else
 				{
-					printw("\n\n");
-
-					while(fgets(returning_output, BUFFER-1, output))
+					char *returning_output = malloc(BUFFER);
+					FILE *output;
+					char string[BUFFER];
+				
+					output = popen(command.data, "r");
+		
+					if (output == NULL)
 					{
-						printw("%s", returning_output);
-						additional_line += 1;						
+						returning_output = "ERROR WHILE OPENING THE PIPE!";
+					}
+					else
+					{
+						printw("\n\n");
+	
+						while(fgets(returning_output, BUFFER-1, output))
+						{
+							printw("%s", returning_output);
+							additional_line += 1;						
+						}
 					}
 				}
 
