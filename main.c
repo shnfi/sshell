@@ -75,6 +75,8 @@ int main()
 							additional_line += 1;						
 						}
 					}
+
+					free(returning_output);
 				}
 
 				line += additional_line + 3;
@@ -123,6 +125,8 @@ int main()
 		
 		refresh();
 	} while (!*EXIT);
+
+	free(EXIT);
 
 	endwin();
 
