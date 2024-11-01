@@ -11,7 +11,8 @@
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
-# define ctrl(x) ((x) & 0x1f)
+# define CTRL(x) ((x) & 0x1f)
+# define CWD getcwd(NULL, 100)
 
 typedef struct
 {
@@ -96,11 +97,11 @@ int main()
 
 				break;
 
-			case ctrl('q') : // 'ctrl' key + 'q' key
+			case CTRL('q') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
 				break;
 
-			case ctrl('d') : // 'ctrl' key + 'q' key
+			case CTRL('d') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
 				break;
 
