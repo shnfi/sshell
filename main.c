@@ -8,6 +8,7 @@
 
 # include "get_output.h"
 # include "builtin_commands/exit_c.h"
+# include "builtin_commands/help_c.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
@@ -48,9 +49,14 @@ int main()
 		switch (ch)
 		{
 			case 10 : // 'enter' key
-				int additional_line;
+				int *additional_line = malloc(sizeof(int));
+				*additional_line = 0;
 
-				if (strcmp(command.data, "exit") == 0)
+				if (strcmp(command.data, "help") == 0)
+				{
+					help_c(USERNAME, additional_line);
+				}
+				else if (strcmp(command.data, "exit") == 0)
 				{
 					exit_c(EXIT);
 				}
@@ -73,18 +79,21 @@ int main()
 						while(fgets(returning_output, BUFFER-1, output))
 						{
 							printw("%s", returning_output);
-							additional_line += 1;						
+							*additional_line += 1;						
 						}
 					}
 
 					free(returning_output);
 				}
 
-				line += additional_line + 3;
-				additional_line = 0;
+				line += *additional_line + 3;
+				*additional_line = 0;
 				strcpy(command.data, "");
 				command.len = 0;
+
+				free(additional_line);
 				memset(command.data, 0, sizeof(command.data));
+
 				break;
 
 			case 263 : // 'backspace' key
