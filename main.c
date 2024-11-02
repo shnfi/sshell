@@ -86,7 +86,9 @@ int main()
 					free(returning_output);
 				}
 
-				line += *additional_line + 3;
+				if (command.len != 0) line += 2;
+
+				line += *additional_line + 1;
 				*additional_line = 0;
 				strcpy(command.data, "");
 				command.len = 0;
