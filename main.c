@@ -108,6 +108,12 @@ int main()
 
 				break;
 
+			case CTRL('c') : // 'ctrl' key + 'c' key
+				line += 1;
+				strcpy(command.data, "");
+				command.len = 0;
+				break;
+
 			case CTRL('q') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
 				break;
