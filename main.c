@@ -69,6 +69,15 @@ int main()
 				{
 					exit_c(EXIT);
 				}
+				else if (strcmp(command.data, "clear") == 0)
+				{
+					clear();
+					//erase();
+					line = 0;
+					strcpy(command.data, "");
+					command.len = 0;
+					break;
+				}
 				else
 				{
 					char *returning_output = malloc(BUFFER);
