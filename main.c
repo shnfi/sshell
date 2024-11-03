@@ -3,6 +3,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <time.h>
+# include <sys/ioctl.h>
 
 # include <ncurses.h>
 
@@ -12,7 +13,7 @@
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
-# define CTRL(x) ((x) & 0x1f)
+# define IS_CTRL_PRESSED(x) ((x) & 0x1f)
 # define CWD getcwd(NULL, 100)
 
 typedef struct
@@ -49,6 +50,14 @@ int main()
 		switch (ch)
 		{
 			case 10 : // 'enter' key
+				struct winsize max;
+				ioctl(0, TIOCGWINSZ , &max);
+
+				if (line >= max.ws_row - 5)
+				{
+					return 0; // i will add a clear screen or text overflow haldler in this position later!
+				}
+
 				int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
 
@@ -108,17 +117,17 @@ int main()
 
 				break;
 
-			case CTRL('c') : // 'ctrl' key + 'c' key
+			case IS_CTRL_PRESSED('c') : // 'ctrl' key + 'c' key
 				line += 1;
 				strcpy(command.data, "");
 				command.len = 0;
 				break;
 
-			case CTRL('q') : // 'ctrl' key + 'q' key
+			case IS_CTRL_PRESSED('q') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
 				break;
 
-			case CTRL('d') : // 'ctrl' key + 'q' key
+			case IS_CTRL_PRESSED('d') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
 				break;
 
