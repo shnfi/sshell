@@ -75,7 +75,6 @@ int main()
 				else if (strcmp(command.data, "clear") == 0)
 				{
 					clear_c(line, command.data, command.len);
-					break;
 				}
 				else
 				{
