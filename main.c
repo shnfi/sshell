@@ -8,6 +8,7 @@
 # include <ncurses.h>
 
 # include "get_output.h"
+
 # include "builtin_commands/exit_c.h"
 # include "builtin_commands/help_c.h"
 # include "builtin_commands/clear_c.h"
@@ -160,6 +161,8 @@ int main()
 		refresh();
 	} while (!*EXIT);
 
+	free(command.len);
+	free(line);
 	free(EXIT);
 
 	endwin();
