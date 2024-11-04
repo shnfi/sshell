@@ -1,21 +1,23 @@
 # include <stdio.h>
 # include <string.h>
 
+# define BUFF 100
+
 void saywithsmile_c(char str[], int *al)
 {
-   int ws = 0;
-   char *output = malloc(100);
+   int index_of_whitespace;
 
    for (int i = 0; i < strlen(str); i++)
    {
-      if (str[i] == ' ') ws++;
-
-      if (ws >= 1) output[strlen(output)] = str[i];
+      if (str[i] == ' ') 
+      {
+         index_of_whitespace = i;
+         break;
+      }
    }
 
-   printw("\n\n:) -> %s\n", output);
-
-   free(output);
+   printw("\n\n:) -> ");
+   for (int i = index_of_whitespace; i < strlen(str); i++) printw("%c", str[i]); 
 
    *al += 1;
 }
