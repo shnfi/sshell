@@ -8,10 +8,12 @@
 # include <ncurses.h>
 
 # include "get_output.h"
+# include "called_command_finder.h"
 
 # include "builtin_commands/exit_c.h"
 # include "builtin_commands/help_c.h"
 # include "builtin_commands/clear_c.h"
+# include "builtin_commands/saywithsmile_c.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
@@ -76,6 +78,10 @@ int main()
 				else if (strcmp(command.data, "clear") == 0)
 				{
 					clear_c(line, command.data, command.len);
+				}
+				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0)
+				{
+					saywithsmile_c(command.data, additional_line);
 				}
 				else
 				{
