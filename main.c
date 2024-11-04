@@ -59,7 +59,7 @@ int main()
 
 				if (*line >= max.ws_row - 5)
 				{
-					return 0; // i will add a clear screen or text overflow haldler in this position later!
+					clear_c(line, command.data, command.len);
 				}
 
 				int *additional_line = malloc(sizeof(int));
