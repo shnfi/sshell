@@ -87,7 +87,6 @@ int main()
 				{
 					char *returning_output = malloc(BUFFER);
 					FILE *output;
-					char string[BUFFER];
 				
 					output = popen(command.data, "r");
 		
