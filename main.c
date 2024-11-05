@@ -14,6 +14,7 @@
 # include "builtin_commands/help_c.h"
 # include "builtin_commands/clear_c.h"
 # include "builtin_commands/saywithsmile_c.h"
+# include "builtin_commands/cd_c.h"
 
 # define USERNAME get_output("whoami")
 # define MAX_COMMAND_LEN 500
@@ -82,6 +83,10 @@ int main()
 				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0)
 				{
 					saywithsmile_c(command.data, additional_line);
+				}
+				else if (strcmp(called_command_finder(command.data), "cd") == 0)
+				{
+					cd_c(command.data);
 				}
 				else
 				{
