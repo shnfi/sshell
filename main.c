@@ -7,7 +7,7 @@
 
 # include <ncurses.h>
 
-# include "get_output.h"
+# include "get_one_word_output.h"
 # include "called_command_finder.h"
 
 # include "builtin_commands/exit_c.h"
