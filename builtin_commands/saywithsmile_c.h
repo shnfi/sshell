@@ -1,7 +1,7 @@
-# include <stdio.h>
-# include <string.h>
+#include <stdio.h>
+#include <string.h>
 
-# define BUFF 100
+#define BUFF 100
 
 void saywithsmile_c(char str[], int *al)
 {

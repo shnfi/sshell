@@ -1,4 +1,4 @@
-# include <string.h>
+#include <string.h>
 
 void clear_c(int *line, char command[], int *len)
 {
