@@ -1,25 +1,34 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <time.h>
-# include <sys/ioctl.h>
+/*
+* 
+* project started at Oct 27, 2024
+*
+* there is no such cool thing in it (maybe it is), but the main goal is
+* to learn new things about operating system .
+* 
+*/
 
-# include <ncurses.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <time.h>
+#include <sys/ioctl.h>
 
-# include "get_one_word_output.h"
-# include "called_command_finder.h"
+#include <ncurses.h>
 
-# include "builtin_commands/exit_c.h"
-# include "builtin_commands/help_c.h"
-# include "builtin_commands/clear_c.h"
-# include "builtin_commands/saywithsmile_c.h"
-# include "builtin_commands/cd_c.h"
+#include "get_one_word_output.h"
+#include "called_command_finder.h"
 
-# define USERNAME get_output("whoami")
-# define MAX_COMMAND_LEN 500
-# define IS_CTRL_PRESSED(x) ((x) & 0x1f)
-# define CWD getcwd(NULL, 100)
+#include "builtin_commands/exit_c.h"
+#include "builtin_commands/help_c.h"
+#include "builtin_commands/clear_c.h"
+#include "builtin_commands/saywithsmile_c.h"
+#include "builtin_commands/cd_c.h"
+
+#define USERNAME get_output("whoami")
+#define MAX_COMMAND_LEN 500
+#define IS_CTRL_PRESSED(x) ((x) & 0x1f)
+#define CWD getcwd(NULL, 100)
 
 typedef struct
 {
@@ -121,32 +130,40 @@ int main()
 				*line += 1;
 				strcpy(command.data, "");
 				*command.len = 0;
+
 				break;
 
 			case IS_CTRL_PRESSED('q') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
+
 				break;
 
 			case IS_CTRL_PRESSED('d') : // 'ctrl' key + 'q' key
 				exit_c(EXIT);
+
 				break;
 
 			case 261 : // 'right arrow' key
+
 				break;
 
 			case 260 : // 'left arrow' key
+
 				break;
 
 			case 258 : // 'down arrow' key
+
 				break;
 
 			case 259 : // 'up arrow' key
+
 				break;
 
 			default : 
 				//mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
 				command.data[*command.len] = (char) ch;
 				*command.len += 1;
+
 				break;
 		}
 		
