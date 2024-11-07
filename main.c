@@ -60,34 +60,16 @@ int main()
 				struct winsize max;
 				ioctl(0, TIOCGWINSZ , &max);
 
-				if (*line >= max.ws_row - 5)
-				{
-					clear_c(line, command.data, command.len);
-				}
+				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len);
 
 				int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
 
-				if (strcmp(command.data, "help") == 0)
-				{
-					help_c(USERNAME, additional_line);
-				}
-				else if (strcmp(command.data, "exit") == 0)
-				{
-					exit_c(EXIT);
-				}
-				else if (strcmp(command.data, "clear") == 0)
-				{
-					clear_c(line, command.data, command.len);
-				}
-				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0)
-				{
-					saywithsmile_c(command.data, additional_line);
-				}
-				else if (strcmp(called_command_finder(command.data), "cd") == 0)
-				{
-					cd_c(command.data);
-				}
+				if (strcmp(command.data, "help") == 0) help_c(USERNAME, additional_line);
+				else if (strcmp(command.data, "exit") == 0) exit_c(EXIT);
+				else if (strcmp(command.data, "clear") == 0) clear_c(line, command.data, command.len);
+				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
+				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
 				else
 				{
 					char *returning_output = malloc(BUFFER);
