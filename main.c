@@ -60,7 +60,7 @@ int main()
 				struct winsize max;
 				ioctl(0, TIOCGWINSZ , &max);
 
-				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len);
+				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len); // this is a temporary handle for scrolling problem (content overflow problem) .
 
 				int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
