@@ -1,6 +1,6 @@
-# include <string.h>
+#include <string.h>
 
-# define BUFFER 1024
+#define BUFFER 1024
 
 char *get_output(char command[])
 {

@@ -1,4 +1,4 @@
-# include <string.h>
+#include <string.h>
 
 char *called_command_finder(char str[])
 {
