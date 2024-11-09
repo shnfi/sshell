@@ -10,6 +10,7 @@ char *current_dir_name(char cwd[])
    static char r_dir_n[BUFFER];
 
    memset(dir_n, 0, sizeof(dir_n));
+   memset(r_dir_n, 0, sizeof(r_dir_n));
 
    for (int i = strlen(cwd) - 1; i >= 0; i--)
    {
