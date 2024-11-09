@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUFF 100
+#ifndef BUFFER
+   #define BUFFER 100
+#endif
 
 void saywithsmile_c(char str[], int *al)
 {
