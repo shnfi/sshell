@@ -1,18 +1,19 @@
 #include <string.h>
 
-#define BUFFER 1024
+#define BUFFER 25
 
 char *get_output(char command[])
 {
-	char *returning_output = malloc(BUFFER);
+	static char returning_output[BUFFER];
 	FILE *output;
-	char string[BUFFER];
+
+	memset(returning_output, 0, sizeof(returning_output));
 
 	output = popen(command, "r");
 
 	if (output == NULL)
 	{
-		returning_output = "ERROR WHILE OPENING THE PIPE!";
+		return "ERROR WHILE OPENNING THE PIPE";
 	}
 	else
 	{
