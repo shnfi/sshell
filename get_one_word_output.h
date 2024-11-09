@@ -1,6 +1,8 @@
 #include <string.h>
 
-#define BUFFER 25
+#ifndef BUFFER
+   #define BUFFER 25
+#endif
 
 char *get_output(char command[])
 {
