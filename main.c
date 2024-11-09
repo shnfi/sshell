@@ -18,6 +18,7 @@
 
 #include "get_one_word_output.h"
 #include "called_command_finder.h"
+#include "current_dir_name.h"
 
 #include "builtin_commands/exit_c.h"
 #include "builtin_commands/help_c.h"
@@ -56,10 +57,10 @@ int main()
 	{
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
+		
   		//printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec); // a line for finding the date and time format specifiers (delete me later!)
 
-		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, USERNAME);
-		mvprintw(*line, sizeof(USERNAME) + 18, "%s", command.data);
+		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(CWD), USERNAME);
 		
 		int ch = getch();
 
