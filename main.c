@@ -18,11 +18,11 @@
 #include "called_command_finder.h"
 #include "current_dir_name.h"
 
-#include "builtin_commands/exit_c.h"
-#include "builtin_commands/help_c.h"
-#include "builtin_commands/clear_c.h"
-#include "builtin_commands/saywithsmile_c.h"
-#include "builtin_commands/cd_c.h"
+#include "builtin_commands/exit_c.c"
+#include "builtin_commands/help_c.c"
+#include "builtin_commands/clear_c.c"
+#include "builtin_commands/saywithsmile_c.c"
+#include "builtin_commands/cd_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -114,15 +114,14 @@ int main()
 					{
 						printw("\n\n");
 	
-						while(fgets(returning_output, MAIN_LINE_BUFFER-1, output))
+						while(fgets(returning_output, MAIN_LINE_BUFFER - 1, output))
 						{
 							/*
 							 * 'additional_line' variable's purpose is to know how many lines should be
 							 * added to the 'line' variable for each line of the command outupt
 							 */
 							
-							// printw("%s", returning_output);
-							printw("%d\n", MAIN_LINE_BUFFER);
+							printw("%s", returning_output);
 							*additional_line += 1;
 						}
 					}
