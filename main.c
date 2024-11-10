@@ -1,11 +1,11 @@
 /*
-* 
-* project started at Oct 27, 2024
-*
-* there is no such cool thing in it (maybe it is), but the main goal is
-* to learn new things about operating system .
-* 
-*/
+ * 
+ * project started at Oct 27, 2024
+ *
+ * there is no such cool thing in it (maybe it is), but the main goal is
+ * to learn new things about operating system .
+ * 
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,7 +58,7 @@ int main()
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
 		
-  		//printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec); // a line for finding the date and time format specifiers (delete me later!)
+  		/* printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec); */ /* a line for finding the date and time format specifiers (delete me later!) */ 
 
 		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(CWD), USERNAME);
 		
@@ -66,11 +66,11 @@ int main()
 
 		switch (ch)
 		{
-			case 10 : // 'enter' key
+			case 10 : /* 'enter' key
 				struct winsize max;
 				ioctl(0, TIOCGWINSZ , &max);
 
-				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len); // this is a temporary handle for scrolling problem (content overflow problem) .
+				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len); /* this is a temporary handle for scrolling problem (content overflow problem) */
 
 				int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
@@ -117,7 +117,7 @@ int main()
 
 				break;
 
-			case 263 : // 'backspace' key
+			case 263 : /* 'backspace' key */
 				if (*command.len > 0)
 				{
 					mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1);
@@ -127,41 +127,41 @@ int main()
 
 				break;
 
-			case IS_CTRL_PRESSED('c') : // 'ctrl' key + 'c' key
+			case IS_CTRL_PRESSED('c') : /* 'ctrl' key + 'c' key */
 				*line += 1;
 				strcpy(command.data, "");
 				*command.len = 0;
 
 				break;
 
-			case IS_CTRL_PRESSED('q') : // 'ctrl' key + 'q' key
+			case IS_CTRL_PRESSED('q') : /* 'ctrl' key + 'q' key */
 				exit_c(EXIT);
 
 				break;
 
-			case IS_CTRL_PRESSED('d') : // 'ctrl' key + 'q' key
+			case IS_CTRL_PRESSED('d') : /* 'ctrl' key + 'q' key */
 				exit_c(EXIT);
 
 				break;
 
-			case 261 : // 'right arrow' key
+			case 261 : /* 'right arrow' key */
 
 				break;
 
-			case 260 : // 'left arrow' key
+			case 260 : /* 'left arrow' key */
 
 				break;
 
-			case 258 : // 'down arrow' key
+			case 258 : /* 'down arrow' key */
 
 				break;
 
-			case 259 : // 'up arrow' key
+			case 259 : /* 'up arrow' key */
 
 				break;
 
 			default : 
-				//mvprintw(1, 100, "%d", ch); // a line for finding the code of keys (delete me later!)
+				/* mvprintw(1, 100, "%d", ch); */ /* a line for finding the code of keys (delete me later!) */
 				command.data[*command.len] = (char) ch;
 				*command.len += 1;
 
