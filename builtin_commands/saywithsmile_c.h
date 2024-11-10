@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifndef BUFFER
-   #define BUFFER 100
-#endif
-
 void saywithsmile_c(char str[], int *al)
 {
    int index_of_whitespace;

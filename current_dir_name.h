@@ -1,13 +1,11 @@
 #include <string.h>
 
-#ifndef BUFFER
-   #define BUFFER 30
-#endif
+#define CDN_BUFFER 30
 
 char *current_dir_name(char cwd[])
 {
-   char dir_n[BUFFER];
-   static char r_dir_n[BUFFER];
+   char dir_n[CDN_BUFFER];
+   static char r_dir_n[CDN_BUFFER];
 
    memset(r_dir_n, 0, sizeof(r_dir_n));
 

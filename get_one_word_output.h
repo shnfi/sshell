@@ -1,12 +1,10 @@
 #include <string.h>
 
-#ifndef BUFFER
-   #define BUFFER 25
-#endif
+#define GOWO_BUFFER 25
 
 char *get_output(char command[])
 {
-	static char returning_output[BUFFER];
+	static char returning_output[GOWO_BUFFER];
 	FILE *output;
 
 	memset(returning_output, 0, sizeof(returning_output));
@@ -19,7 +17,7 @@ char *get_output(char command[])
 	}
 	else
 	{
-		fgets(returning_output, BUFFER-1, output);
+		fgets(returning_output, GOWO_BUFFER-1, output);
 	}
 
 	returning_output[strlen(returning_output)-1] = 0;

@@ -2,7 +2,7 @@
  * project started at Oct 27, 2024
  *
  * there is no such cool thing in it (maybe it is), but the main goal is
- * to learn new things about operating system .
+ * to learn new things about operating system and have fun ! 
  */
 
 #include <stdio.h>
@@ -29,6 +29,8 @@
 #define IS_CTRL_PRESSED(x) ((x) & 0x1f)
 #define CWD getcwd(NULL, 100)
 
+#define MAIN_LINE_BUFFER 30
+
 typedef struct
 {
 	char data[MAX_COMMAND_LEN];
@@ -48,6 +50,10 @@ int main()
 
 	bool *EXIT = malloc(sizeof(bool));
 	*EXIT = false;
+
+	/*
+	 * declaring the 'command' object
+	 */
 
 	command_s command = { "", malloc(MAX_COMMAND_LEN) };
 
@@ -69,7 +75,11 @@ int main()
 				struct winsize max;
 				ioctl(0, TIOCGWINSZ , &max);
 
-				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len); /* this is a temporary handle for scrolling problem (content overflow problem) */
+				/*
+				 * this is a temporary handle for scrolling problem (content overflow problem) 
+				 */
+				
+				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len);
 
 				int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
@@ -91,7 +101,7 @@ int main()
 					 * commands that we checked in the last few lines 
 					 */
 
-					char *returning_output = malloc(BUFFER);
+					char *returning_output = malloc(MAIN_LINE_BUFFER);
 					FILE *output;
 				
 					output = popen(command.data, "r");
@@ -104,20 +114,25 @@ int main()
 					{
 						printw("\n\n");
 	
-						while(fgets(returning_output, BUFFER-1, output))
+						while(fgets(returning_output, MAIN_LINE_BUFFER-1, output))
 						{
 							/*
 							 * 'additional_line' variable's purpose is to know how many lines should be
 							 * added to the 'line' variable for each line of the command outupt
 							 */
 							
-							printw("%s", returning_output);
-							*additional_line += 1;						
+							// printw("%s", returning_output);
+							printw("%d\n", MAIN_LINE_BUFFER);
+							*additional_line += 1;
 						}
 					}
 
 					free(returning_output);
 				}
+
+				/*
+				 * if command was not equal to '', this will add 2 lines for the better space between output and the next prompt
+				 */
 
 				if (*command.len != 0) *line += 2;
 
