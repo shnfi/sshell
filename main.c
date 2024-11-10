@@ -1,10 +1,8 @@
 /*
- * 
  * project started at Oct 27, 2024
  *
  * there is no such cool thing in it (maybe it is), but the main goal is
  * to learn new things about operating system .
- * 
  */
 
 #include <stdio.h>
@@ -66,7 +64,7 @@ int main()
 
 		switch (ch)
 		{
-			case 10 : /* 'enter' key
+			case 10 : /* 'enter' key */ 
 				struct winsize max;
 				ioctl(0, TIOCGWINSZ , &max);
 
@@ -75,6 +73,11 @@ int main()
 				int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
 
+				/*
+				 * checking the command for specific commands and running the builtin commands
+				 * from the 'builtin_commands' folder
+				 */
+
 				if (strcmp(command.data, "help") == 0) help_c(USERNAME, additional_line);
 				else if (strcmp(command.data, "exit") == 0) exit_c(EXIT);
 				else if (strcmp(command.data, "clear") == 0) clear_c(line, command.data, command.len);
@@ -82,6 +85,11 @@ int main()
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
 				else
 				{
+					/*
+					 * running the entered command if it was not on of the specific 
+					 * commands that we checked in the last few lines 
+					 */
+
 					char *returning_output = malloc(BUFFER);
 					FILE *output;
 				
@@ -97,6 +105,11 @@ int main()
 	
 						while(fgets(returning_output, BUFFER-1, output))
 						{
+							/*
+							 * 'additional_line' variable's purpose is to know how many lines should be
+							 * added to the 'line' variable for each line of the command outupt
+							 */
+							
 							printw("%s", returning_output);
 							*additional_line += 1;						
 						}
@@ -107,9 +120,12 @@ int main()
 
 				if (*command.len != 0) *line += 2;
 
+				/*
+				 * resetting command struct and adding to the 'line' variable cuz user goes down one row
+				 */
+
 				*line += *additional_line + 1;
 				*additional_line = 0;
-				strcpy(command.data, "");
 				*command.len = 0;
 
 				free(additional_line);
@@ -120,7 +136,7 @@ int main()
 			case 263 : /* 'backspace' key */
 				if (*command.len > 0)
 				{
-					mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1);
+					mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + sizeof(current_dir_name(CWD)) + 2);
 					command.data[*command.len-1] = 0;
 					*command.len -= 1;
 				}
@@ -128,6 +144,10 @@ int main()
 				break;
 
 			case IS_CTRL_PRESSED('c') : /* 'ctrl' key + 'c' key */
+				/*
+				 * skipping the current prompt and reseting the command
+				 */
+
 				*line += 1;
 				strcpy(command.data, "");
 				*command.len = 0;
@@ -145,23 +165,24 @@ int main()
 				break;
 
 			case 261 : /* 'right arrow' key */
-
 				break;
 
 			case 260 : /* 'left arrow' key */
-
 				break;
 
 			case 258 : /* 'down arrow' key */
-
 				break;
 
 			case 259 : /* 'up arrow' key */
-
 				break;
 
 			default : 
 				/* mvprintw(1, 100, "%d", ch); */ /* a line for finding the code of keys (delete me later!) */
+
+				/*
+				 * adding the clicked char to the command.data string
+				 */
+
 				command.data[*command.len] = (char) ch;
 				*command.len += 1;
 
