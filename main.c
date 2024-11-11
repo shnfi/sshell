@@ -64,8 +64,8 @@ int main()
 		
   		/* printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec); */ /* a line for finding the date and time format specifiers (delete me later!) */ 
 
-		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(CWD), USERNAME);
-		mvprintw(*line, sizeof(USERNAME) + 18 + sizeof(current_dir_name(CWD)) + 1, "%s", command.data);
+		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
+		mvprintw(*line, sizeof(USERNAME) + 18 + sizeof(current_dir_name(getcwd(NULL, 100))) + 1, "%s", command.data);
 		
 		int ch = getch();
 
@@ -151,10 +151,11 @@ int main()
 			case 263 : /* 'backspace' key */
 				if (*command.len > 0)
 				{
-					mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + sizeof(current_dir_name(CWD)) + 1);
+					mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + sizeof(current_dir_name(getcwd(NULL, 100))) + 1);
 					command.data[*command.len-1] = 0;
 					*command.len -= 1;
 				}
+				else beep();
 
 				break;
 
@@ -180,15 +181,27 @@ int main()
 				break;
 
 			case 261 : /* 'right arrow' key */
+				// printf("\a");
+				beep();
+				
 				break;
 
 			case 260 : /* 'left arrow' key */
+				// printf("\a");
+				beep();
+				
 				break;
 
 			case 258 : /* 'down arrow' key */
+				// printf("\a");
+				beep();
+				
 				break;
 
 			case 259 : /* 'up arrow' key */
+				// printf("\a");
+				beep();
+				
 				break;
 
 			default : 
