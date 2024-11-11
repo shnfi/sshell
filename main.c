@@ -29,7 +29,7 @@
 #define IS_CTRL_PRESSED(x) ((x) & 0x1f)
 #define CWD getcwd(NULL, 100)
 
-#define MAIN_LINE_BUFFER 30
+#define MAIN_LINE_BUFFER 250
 
 typedef struct
 {
