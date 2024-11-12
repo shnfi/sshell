@@ -180,6 +180,11 @@ int main()
 
 				break;
 
+			case IS_CTRL_PRESSED('\b') :
+				beep();
+
+				break;
+
 			case 9 : /* 'tab' key */
 			case 27 : /* 'esc' key */
 			case 265 ... 276 : /* functional keys */
