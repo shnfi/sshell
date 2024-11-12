@@ -3,7 +3,7 @@
 
 void saywithsmile_c(char str[], int *al)
 {
-   int index_of_whitespace;
+   unsigned int index_of_whitespace;
 
    for (int i = 0; i < strlen(str); i++)
    {

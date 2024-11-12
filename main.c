@@ -34,7 +34,7 @@
 typedef struct
 {
 	char data[MAX_COMMAND_LEN];
-	int *len;
+	unsigned int *len;
 } command_s;
 
 int main()
@@ -45,7 +45,7 @@ int main()
 	scrollok(stdscr, true);
 	keypad(stdscr, true);
 
-	int *line = malloc(500);
+	unsigned int *line = malloc(500);
 	*line = 0;
 
 	bool *EXIT = malloc(sizeof(bool));
@@ -81,7 +81,7 @@ int main()
 				
 				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len);
 
-				int *additional_line = malloc(sizeof(int));
+				unsigned int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
 
 				/*

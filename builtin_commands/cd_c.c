@@ -3,7 +3,7 @@
 
 void cd_c(char str[])
 {
-   int ws_index;
+   unsigned int ws_index;
    static char new_dir[30];
 
    memset(new_dir, 0, sizeof(new_dir));
