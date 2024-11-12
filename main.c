@@ -180,6 +180,9 @@ int main()
 
 				break;
 
+			case 9 : /* 'tab' key */
+			case 27 : /* 'esc' key */
+			case 265 ... 276 : /* functional keys */
 			case 258 ... 261 : /* arrow keys */
 				beep();
 				
