@@ -180,26 +180,7 @@ int main()
 
 				break;
 
-			case 261 : /* 'right arrow' key */
-				// printf("\a");
-				beep();
-				
-				break;
-
-			case 260 : /* 'left arrow' key */
-				// printf("\a");
-				beep();
-				
-				break;
-
-			case 258 : /* 'down arrow' key */
-				// printf("\a");
-				beep();
-				
-				break;
-
-			case 259 : /* 'up arrow' key */
-				// printf("\a");
+			case 258 ... 261 : /* arrow keys */
 				beep();
 				
 				break;
