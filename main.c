@@ -171,10 +171,6 @@ int main()
 				break;
 
 			case IS_CTRL_PRESSED('q') : /* 'ctrl' key + 'q' key */
-				exit_c(EXIT);
-
-				break;
-
 			case IS_CTRL_PRESSED('d') : /* 'ctrl' key + 'q' key */
 				exit_c(EXIT);
 
