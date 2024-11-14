@@ -10,6 +10,6 @@ just compile the `main.c` file . (do not forget the `lncurses` option!)
 gcc main.c -lncurses
 ```
 
-\nOR..\n\n
+<br>OR..<br><br>
 
 just use the `compile.sh` file.
