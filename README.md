@@ -9,3 +9,7 @@ just compile the `main.c` file . (do not forget the `lncurses` option!)
 ```bash
 gcc main.c -lncurses
 ```
+
+\nOR..\n\n
+
+just use the `compile.sh` file.
