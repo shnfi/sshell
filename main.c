@@ -92,6 +92,7 @@ int main()
 				if (strcmp(command.data, "help") == 0) help_c(USERNAME, additional_line);
 				else if (strcmp(command.data, "exit") == 0) exit_c(EXIT);
 				else if (strcmp(command.data, "clear") == 0) clear_c(line, command.data, command.len);
+				else if (strcmp(command.data, "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
 				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
 				else
