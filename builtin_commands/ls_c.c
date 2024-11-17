@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 void ls_c(char cwd[], int *al)
 {
@@ -12,15 +13,28 @@ void ls_c(char cwd[], int *al)
 
    while (d != NULL)
    {
-      if (d->d_name != "." || d->d_name != "..")
+      struct stat stats;
+      char symbol;
+
+      /*
+       * checking the type of the file in the directory and setting the symbol for listing it
+       */
+
+      if (stat(d->d_name, &stats) == 0)
       {
-         // printw("(^) %s\n", d->d_name);
-         // printw("[_] %s\n", d->d_name);
-         printw("(_) %s\n", d->d_name);
-         d = readdir(path);
-         occupied_lines++;
+         if (S_ISDIR(stats.st_mode)) symbol = 'D';
+         else symbol = 'F';
       }
-      else continue;
+      else break;
+
+      /*
+       * listing the directories 
+       */
+
+      printw("[%c] %s\n", symbol, d->d_name);
+      d = readdir(path);
+
+      occupied_lines++;
    }
 
    *al += occupied_lines;
