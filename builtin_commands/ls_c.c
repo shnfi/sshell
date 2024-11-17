@@ -20,6 +20,7 @@ void ls_c(char cwd[], int *al)
 
       if (d->d_type == DT_DIR) symbol = 'D';
       else if (d->d_type == DT_REG) symbol = 'F';
+      else if (d->d_type == DT_UNKNOWN) symbol = '?';
       else symbol = 'X';
 
       /*
