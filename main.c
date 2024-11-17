@@ -23,6 +23,7 @@
 #include "builtin_commands/clear_c.c"
 #include "builtin_commands/saywithsmile_c.c"
 #include "builtin_commands/cd_c.c"
+#include "builtin_commands/ls_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -62,7 +63,11 @@ int main()
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
 		
-  		/* printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec); */ /* a line for finding the date and time format specifiers (delete me later!) */ 
+		/*
+		 * a line for finding the date and time format specifiers (delete that at the end of the proj!) 
+		 */ 
+		
+  		// printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
 		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
 		mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
@@ -95,6 +100,7 @@ int main()
 				else if (strcmp(command.data, "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
 				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
+				else if (strcmp(command.data, "ls") == 0) ls_c(getcwd(NULL, 100), additional_line);
 				else
 				{
 					/*
