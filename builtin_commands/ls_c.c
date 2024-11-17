@@ -14,7 +14,9 @@ void ls_c(char cwd[], int *al)
    {
       if (d->d_name != "." || d->d_name != "..")
       {
-         printw("[D]-%s\n", d->d_name);
+         // printw("(^) %s\n", d->d_name);
+         // printw("[_] %s\n", d->d_name);
+         printw("(_) %s\n", d->d_name);
          d = readdir(path);
          occupied_lines++;
       }
