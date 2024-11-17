@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <dirent.h>
-#include <sys/stat.h>
 
 void ls_c(char cwd[], int *al)
 {
@@ -13,19 +12,15 @@ void ls_c(char cwd[], int *al)
 
    while (d != NULL)
    {
-      struct stat stats;
       char symbol;
 
       /*
        * checking the type of the file in the directory and setting the symbol for listing it
        */
 
-      if (stat(d->d_name, &stats) == 0)
-      {
-         if (S_ISDIR(stats.st_mode)) symbol = 'D';
-         else symbol = 'F';
-      }
-      else break;
+      if (d->d_type == DT_DIR) symbol = 'D';
+      else if (d->d_type == DT_REG) symbol = 'F';
+      else symbol = 'X';
 
       /*
        * listing the directories 
