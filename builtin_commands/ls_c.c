@@ -26,7 +26,7 @@ void ls_c(char cwd[], int *al)
        * listing the directories 
        */
 
-      printw("[%c] %s\n", symbol, d->d_name);
+      printw("[ %c ] %s\n", symbol, d->d_name);
       d = readdir(path);
 
       occupied_lines++;
