@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <sys/ioctl.h>
+#include <errno.h>
 
 #include <ncurses.h>
 
@@ -100,11 +101,11 @@ int main()
 				else if (strcmp(command.data, "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
 				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
-				else if (strcmp(command.data, "ls") == 0) ls_c(getcwd(NULL, 100), additional_line);
+				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line);
 				else
 				{
 					/*
-					 * running the entered command if it was not on of the specific 
+					 * running the entered command if it was not one of the specific 
 					 * commands that we checked in the last few lines 
 					 */
 
@@ -124,9 +125,9 @@ int main()
 						while(fgets(returning_output, MAIN_LINE_BUFFER - 1, output))
 						{
 							/*
-							 * 'additional_line' variable's purpose is to know how many lines should be
-							 * added to the 'line' variable for each line of the command outupt
-							 */
+							* 'additional_line' variable's purpose is to know how many lines should be
+							* added to the 'line' variable for each line of the command outupt
+							*/
 							
 							printw("%s", returning_output);
 							*additional_line += 1;
