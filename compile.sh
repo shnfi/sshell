@@ -1,1 +1,1 @@
-gcc main.c -lncurses
+gcc main.c -lncurses -o sshell
