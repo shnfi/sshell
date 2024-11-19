@@ -25,6 +25,7 @@
 #include "builtin_commands/saywithsmile_c.c"
 #include "builtin_commands/cd_c.c"
 #include "builtin_commands/ls_c.c"
+#include "builtin_commands/psetting_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -57,7 +58,8 @@ int main()
 	 * 'c' stands for clock and 'd' stands for date, its for choosing you want to show the date or clock in the prompt
 	 */
 
-	char c_or_d = 'd';
+	char *c_or_d = malloc(5);
+	c_or_d = "d";
 
 	/*
 	 * declaring the 'command' object
@@ -76,7 +78,7 @@ int main()
 		
   		// printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-		if (c_or_d == 'c')
+		if ( c_or_d == "c")
 		{
 			/*
 			 * this prompt include the current clock
@@ -85,7 +87,7 @@ int main()
 			mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
 			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
 		}
-		else if (c_or_d == 'd')
+		else if ( c_or_d == "d")
 		{
 			/*
 			 * this prompt include the today's date
@@ -124,6 +126,7 @@ int main()
 				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
 				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line);
+				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &c_or_d);
 				else
 				{
 					/*
@@ -181,7 +184,14 @@ int main()
 			case 263 : /* 'backspace' key */
 				if (*command.len > 0)
 				{
-					mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
+					if (c_or_d == "c")
+					{
+						mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
+					}
+					else if (c_or_d == "d")
+					{
+						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
+					}
 					command.data[*command.len-1] = 0;
 					*command.len -= 1;
 				}
