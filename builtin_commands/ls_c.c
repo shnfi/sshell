@@ -51,7 +51,7 @@ void ls_c(char cwd[], int *al)
        * listing the directories 
        */
 
-      printw("[ %c ]  [ %7ld B ]  %s\n", symbol, file_size, d->d_name);
+      printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
       d = readdir(path);
 
       *al += 1;
