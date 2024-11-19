@@ -54,6 +54,12 @@ int main()
 	*EXIT = false;
 
 	/*
+	 * 'c' stands for clock and 'd' stands for date, its for choosing you want to show the date or clock in the prompt
+	 */
+
+	char c_or_d = 'd';
+
+	/*
 	 * declaring the 'command' object
 	 */
 
@@ -70,8 +76,24 @@ int main()
 		
   		// printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-		mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
-		mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+		if (c_or_d == 'c')
+		{
+			/*
+			 * this prompt include the current clock
+			 */
+
+			mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
+			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+		}
+		else if (c_or_d == 'd')
+		{
+			/*
+			 * this prompt include the today's date
+			 */
+			
+			mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 100)), USERNAME);
+			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+		}
 		
 		int ch = getch();
 
