@@ -56,6 +56,13 @@ void ls_c(char cwd[], int *al)
 
       *al += 1;
 
-      if ((char *) d == NULL) return;
+      if ((char *) d == NULL) 
+      {
+         free(path);
+         free(d);
+         free(file);
+
+         return;
+      }
    }
 }
