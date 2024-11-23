@@ -12,6 +12,7 @@
 #include <time.h>
 #include <sys/ioctl.h>
 #include <errno.h>
+#include <sys/sysinfo.h>
 
 #include <ncurses.h>
 
@@ -27,6 +28,7 @@
 #include "builtin_commands/ls_c.c"
 #include "builtin_commands/psetting_c.c"
 #include "builtin_commands/pwd_c.c"
+#include "builtin_commands/uptime_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -102,9 +104,20 @@ int main()
 
 		switch (ch)
 		{
-			case 10 : /* 'enter' key */ 
+			case 10 : /* 'enter' key */
+				/*
+				 * preparing the structs for the window size
+				 */
+
 				struct winsize max;
 				ioctl(0, TIOCGWINSZ , &max);
+
+				/*
+				 * preparing the structs for the system informations
+				 */
+
+				struct sysinfo info;
+				sysinfo(&info);
 
 				/*
 				 * this is a temporary handle for scrolling problem (content overflow problem) 
@@ -129,6 +142,7 @@ int main()
 				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line);
 				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &c_or_d);
 				else if (strcmp(command.data, "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
+				else if (strcmp(command.data, "uptime") == 0) uptime_c(info.uptime, additional_line);
 				else
 				{
 					/*
