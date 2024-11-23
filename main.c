@@ -26,6 +26,7 @@
 #include "builtin_commands/cd_c.c"
 #include "builtin_commands/ls_c.c"
 #include "builtin_commands/psetting_c.c"
+#include "builtin_commands/pwd_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -127,6 +128,7 @@ int main()
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
 				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line);
 				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &c_or_d);
+				else if (strcmp(command.data, "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
 				else
 				{
 					/*
