@@ -58,14 +58,6 @@ int main()
 	*EXIT = false;
 
 	/*
-	 * start clock variables 
-	 */
-
-	int n = 0; /* its for only setting this variables */
-
-	int SS, SM, SH;
-
-	/*
 	 * 'c' stands for clock and 'd' stands for date, its for choosing you want to show the date or clock in the prompt
 	 */
 
@@ -83,19 +75,6 @@ int main()
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
 
-		/*
-		 * setting the starting clock variables at the start of the program only one time
-		 */
-
-		if (n < 1)
-		{
-			SS = tm.tm_sec;
-			SM = tm.tm_min;
-			SH = tm.tm_hour;
-
-			n++;
-		}
-		
 		/*
 		 * a line for finding the date and time format specifiers (delete that at the end of the proj!) 
 		 */ 
@@ -163,7 +142,7 @@ int main()
 				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line);
 				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &c_or_d);
 				else if (strcmp(command.data, "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
-				else if (strcmp(command.data, "uptime") == 0) uptime_c(info.uptime, SS, SM, SH, additional_line);
+				else if (strcmp(command.data, "uptime") == 0) uptime_c(info.uptime, additional_line);
 				else
 				{
 					/*
