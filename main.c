@@ -30,6 +30,7 @@
 #include "builtin_commands/pwd_c.c"
 #include "builtin_commands/uptime_c.c"
 #include "builtin_commands/touch_c.c"
+#include "builtin_commands/mkdir_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -145,6 +146,7 @@ int main()
 				else if (strcmp(command.data, "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
 				else if (strcmp(command.data, "uptime") == 0) uptime_c(info.uptime, additional_line);
 				else if (strcmp(called_command_finder(command.data), "touch") == 0) touch_c(getcwd(NULL, 100), command.data);
+				else if (strcmp(called_command_finder(command.data), "mkdir") == 0) mkdir_c(getcwd(NULL, 100), command.data);
 				else
 				{
 					/*
