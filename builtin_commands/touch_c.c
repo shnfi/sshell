@@ -20,4 +20,7 @@ void touch_c(char cwd[], char str[])
    strcat(file_path, arg);
 
    FILE *f = fopen(file_path, "w");
+
+   free(arg);
+   free(file_path);
 }
