@@ -1,5 +1,6 @@
 #include <string.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 
 void mkdir_c(char cwd[], char str[])
 {
@@ -20,7 +21,7 @@ void mkdir_c(char cwd[], char str[])
 
    strcat(file_path, arg);
 
-   mkdir(file_path, 'w');
+   mkdir(file_path, 0755);
 
    free(arg);
    free(file_path);
