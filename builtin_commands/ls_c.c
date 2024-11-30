@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <dirent.h>
 
-void ls_c(char cwd[], int *al)
+void ls_c(char cwd[], int *al, char mode)
 {
    DIR *path = opendir(cwd);
    struct dirent *d = readdir(path);
@@ -51,10 +51,24 @@ void ls_c(char cwd[], int *al)
        * listing the directories 
        */
 
-      printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
-      d = readdir(path);
+      // printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
+      // d = readdir(path);
 
-      *al += 1;
+      if (mode == 'n')
+      {
+         if (d->d_name[0] != '.')
+         {
+            printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
+            *al += 1;
+         }
+      }
+      else if (mode == 'a')
+      {
+         printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
+         *al += 1;
+      }
+
+      d = readdir(path);
 
       if ((char *) d == NULL) 
       {
