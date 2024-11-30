@@ -51,9 +51,6 @@ void ls_c(char cwd[], int *al, char mode)
        * listing the directories 
        */
 
-      // printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
-      // d = readdir(path);
-
       if (mode == 'n')
       {
          if (d->d_name[0] != '.')
