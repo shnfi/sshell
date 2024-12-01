@@ -64,8 +64,11 @@ int main()
 	 * 'c' stands for clock and 'd' stands for date, its for choosing you want to show the date or clock in the prompt
 	 */
 
-	char *c_or_d = malloc(5);
-	c_or_d = "d";
+	char *clock_or_date = malloc(5);
+	clock_or_date = "date";
+
+	char *round_or_square = malloc(7);
+	round_or_square = "square";
 
 	/*
 	 * declaring the 'command' object
@@ -78,29 +81,39 @@ int main()
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
 
-		/*
-		 * a line for finding the date and time format specifiers (delete that at the end of the proj!) 
-		 */ 
-		
-  		// printw("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-
-		if ( c_or_d == "c")
+		if (clock_or_date == "clock")
 		{
 			/*
 			 * this prompt include the current clock
 			 */
 
-			mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
-			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			if (round_or_square == "round")
+			{
+				mvprintw(*line, 0, "(%02d:%02d:%02d)-(%s)-(%s)~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			}
+			else if (round_or_square == "square")
+			{
+				mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			}
 		}
-		else if ( c_or_d == "d")
+		else if (clock_or_date == "date")
 		{
 			/*
 			 * this prompt include the today's date
 			 */
 			
-			mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 100)), USERNAME);
-			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			if (round_or_square == "round")
+			{
+				mvprintw(*line, 0, "(%d-%02d-%02d)-(%s)-(%s)~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			}
+			else if (round_or_square == "square")
+			{
+				mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			}
 		}
 		
 		int ch = getch();
@@ -144,7 +157,7 @@ int main()
 				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
 				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line, 'n');
 				else if (strcmp(command.data, "ls -a") == 0 || strcmp(command.data, "ls -la") == 0) ls_c(getcwd(NULL, 100), additional_line, 'a');
-				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &c_or_d);
+				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &clock_or_date, &round_or_square);
 				else if (strcmp(command.data, "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
 				else if (strcmp(command.data, "uptime") == 0) uptime_c(info.uptime, additional_line);
 				else if (strcmp(called_command_finder(command.data), "touch") == 0) touch_c(getcwd(NULL, 100), command.data);
@@ -207,11 +220,11 @@ int main()
 			case 263 : /* 'backspace' key */
 				if (*command.len > 0)
 				{
-					if (c_or_d == "c")
+					if (clock_or_date == "clock")
 					{
 						mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
 					}
-					else if (c_or_d == "d")
+					else if (clock_or_date == "date")
 					{
 						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
 					}
