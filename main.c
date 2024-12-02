@@ -19,6 +19,7 @@
 #include "get_one_word_output.h"
 #include "called_command_finder.h"
 #include "current_dir_name.h"
+#include "trim_extra_spaces.h"
 
 #include "builtin_commands/exit_c.c"
 #include "builtin_commands/help_c.c"
@@ -149,20 +150,20 @@ int main()
 				 * from the 'builtin_commands' folder
 				 */
 
-				if (strcmp(command.data, "help") == 0) help_c(USERNAME, additional_line);
-				else if (strcmp(command.data, "exit") == 0) exit_c(EXIT);
-				else if (strcmp(command.data, "clear") == 0) clear_c(line, command.data, command.len);
-				else if (strcmp(command.data, "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
-				else if (strcmp(called_command_finder(command.data), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
-				else if (strcmp(called_command_finder(command.data), "cd") == 0) cd_c(command.data);
-				else if (strcmp(command.data, "ls") == 0 || strcmp(command.data, "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line, 'n');
-				else if (strcmp(command.data, "ls -a") == 0 || strcmp(command.data, "ls -la") == 0) ls_c(getcwd(NULL, 100), additional_line, 'a');
-				else if (strcmp(called_command_finder(command.data), "psetting") == 0) psetting_c(command.data, &clock_or_date, &round_or_square);
-				else if (strcmp(command.data, "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
-				else if (strcmp(command.data, "uptime") == 0) uptime_c(info.uptime, additional_line);
-				else if (strcmp(called_command_finder(command.data), "touch") == 0) touch_c(getcwd(NULL, 100), command.data);
-				else if (strcmp(called_command_finder(command.data), "mkdir") == 0) mkdir_c(getcwd(NULL, 100), command.data);
-				else if (strcmp(called_command_finder(command.data), "rm") == 0) rm_c(getcwd(NULL, 100), command.data);
+				if (strcmp(trim_extra_spaces(command.data), "help") == 0) help_c(USERNAME, additional_line);
+				else if (strcmp(trim_extra_spaces(command.data), "exit") == 0) exit_c(EXIT);
+				else if (strcmp(trim_extra_spaces(command.data), "clear") == 0) clear_c(line, command.data, command.len);
+				else if (strcmp(trim_extra_spaces(command.data), "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "cd") == 0) cd_c(command.data);
+				else if (strcmp(trim_extra_spaces(command.data), "ls") == 0 || strcmp(trim_extra_spaces(command.data), "ls -l") == 0) ls_c(getcwd(NULL, 100), additional_line, 'n');
+				else if (strcmp(trim_extra_spaces(command.data), "ls -a") == 0 || strcmp(trim_extra_spaces(command.data), "ls -la") == 0) ls_c(getcwd(NULL, 100), additional_line, 'a');
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "psetting") == 0) psetting_c(command.data, &clock_or_date, &round_or_square);
+				else if (strcmp(trim_extra_spaces(command.data), "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
+				else if (strcmp(trim_extra_spaces(command.data), "uptime") == 0) uptime_c(info.uptime, additional_line);
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "touch") == 0) touch_c(getcwd(NULL, 100), command.data);
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "mkdir") == 0) mkdir_c(getcwd(NULL, 100), command.data);
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "rm") == 0) rm_c(getcwd(NULL, 100), command.data);
 				else
 				{
 					/*
