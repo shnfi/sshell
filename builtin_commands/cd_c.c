@@ -4,7 +4,7 @@
 void cd_c(char str[])
 {
    unsigned int ws_index;
-   static char new_dir[30];
+   char *new_dir = malloc(30);
 
    memset(new_dir, 0, sizeof(new_dir));
 
