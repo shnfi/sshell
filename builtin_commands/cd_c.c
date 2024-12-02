@@ -20,4 +20,6 @@ void cd_c(char str[])
    for (int i = ws_index; i < strlen(str); i++) new_dir[strlen(new_dir)] = str[i];
 
    chdir(new_dir);
+
+   free(new_dir);
 }
