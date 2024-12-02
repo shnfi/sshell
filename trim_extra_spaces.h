@@ -1,20 +1,34 @@
+#include <string.h>
+
 char *trim_extra_spaces(char str[])
 {
-   char *trimed_str = malloc(30);
+   int founded_chars;
 
-   memset(trimed_str, 0, sizeof(trimed_str));
+   /*
+    * removing spaces of the beggining 
+    */
 
    for (int i = 0; i < strlen(str); i++)
    {
-      if (str[i] == ' ' && str[i + 1] != '-')
+      if (str[i] == ' ')
       {
-         continue;
+         memmove(&str[i], &str[i + 1], strlen(str) - i);
       }
-      else
-      {
-         trimed_str[strlen(trimed_str)] = str[i];
-      }
+      else break;
    }
 
-   return trimed_str;
+   /*
+    * removing spaces of the end 
+    */
+
+   for (int i = strlen(str) - 1; i > 0; i--)
+   {
+      if (str[i] == ' ')
+      {
+         memmove(&str[i], &str[i + 1], strlen(str) - i);
+      }
+      else break;
+   }
+
+   return str;
 }
