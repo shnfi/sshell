@@ -1,43 +1,26 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "headers/check_for_arg.h"
+
 void psetting_c(char str[], char **c_or_d, char **r_or_s)
-{
-   /*
-    * argument parsing
-    */
-   
-   char *arg = malloc(3);
-   int index_of_dash;
-
-   for (int i = 0; i < strlen(str); i++)
-   {
-      if ((str[i] == '-') == 1) index_of_dash = i;
-
-      if (i >= index_of_dash && i > 8)
-      {
-         arg[strlen(arg)] = str[i];
-      }
-      else continue;
-   }
-
-   /*
-    * making the final decision 
-    */
-   
-   if (strcmp(arg, "-c") == 0)
+{  
+   if (check_for_arg(str, "c") == 1)
    {
       *c_or_d = "clock";
    }
-   else if (strcmp(arg, "-d") == 0)
+   
+   if (check_for_arg(str, "d") == 1)
    {
       *c_or_d = "date";
    }
-   else if (strcmp(arg, "-r") == 0)
+   
+   if (check_for_arg(str, "r") == 1)
    {
       *r_or_s = "round";
    }
-   else if (strcmp(arg, "-s") == 0)
+   
+   if (check_for_arg(str, "s") == 1)
    {
       *r_or_s = "square";
    }
