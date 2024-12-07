@@ -33,6 +33,7 @@
 #include "builtin_commands/touch_c.c"
 #include "builtin_commands/mkdir_c.c"
 #include "builtin_commands/rm_c.c"
+#include "builtin_commands/echo_c.c"
 
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
@@ -163,6 +164,7 @@ int main()
 				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "touch") == 0) touch_c(getcwd(NULL, 100), command.data);
 				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "mkdir") == 0) mkdir_c(getcwd(NULL, 100), command.data);
 				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "rm") == 0) rm_c(getcwd(NULL, 100), command.data);
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "echo") == 0) echo_c(command.data, additional_line);
 				else
 				{
 					/*
