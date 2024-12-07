@@ -156,8 +156,8 @@ int main()
 				else if (strcmp(trim_extra_spaces(command.data), "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
 				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
 				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "cd") == 0) cd_c(command.data);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "ls") == 0) ls_c(getcwd(NULL, 100), additional_line, 'n');
 				else if (strcmp(trim_extra_spaces(command.data), "ls -a") == 0 || strcmp(trim_extra_spaces(command.data), "ls -la") == 0) ls_c(getcwd(NULL, 100), additional_line, 'a');
+				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "ls") == 0) ls_c(getcwd(NULL, 100), additional_line, 'n');
 				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "psetting") == 0) psetting_c(command.data, &clock_or_date, &round_or_square);
 				else if (strcmp(trim_extra_spaces(command.data), "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
 				else if (strcmp(trim_extra_spaces(command.data), "uptime") == 0) uptime_c(info.uptime, additional_line);
