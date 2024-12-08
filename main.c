@@ -16,10 +16,10 @@
 
 #include <ncurses.h>
 
-#include "get_one_word_output.h"
-#include "called_command_finder.h"
-#include "current_dir_name.h"
-#include "trim_extra_spaces.h"
+#include "headers/get_one_word_output.h"
+#include "headers/called_command_finder.h"
+#include "headers/current_dir_name.h"
+#include "headers/trim_extra_spaces.h"
 
 #include "builtin_commands/exit_c.c"
 #include "builtin_commands/help_c.c"
