@@ -1,5 +1,5 @@
 void command_identification(
-   char command_data[], char USERNAME[], int *additional_line, bool *EXIT, int *line, int *command_len, char clock_or_date[], char round_or_square[], int MAIN_LINE_BUFFER, struct sysinfo info
+   char command_data[], char USERNAME[], int *additional_line, bool *EXIT, int *line, int *command_len, char *clock_or_date[], char *round_or_square[], int MAIN_LINE_BUFFER, struct sysinfo info
    )
 {
    if (strcmp(trim_extra_spaces(command_data), "help") == 0) help_c(USERNAME, additional_line);
@@ -9,7 +9,7 @@ void command_identification(
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "saywithsmile") == 0) saywithsmile_c(command_data, additional_line);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "cd") == 0) cd_c(command_data);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "ls") == 0) ls_c(command_data, getcwd(NULL, 100), additional_line);
-   else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "psetting") == 0) psetting_c(command_data, &clock_or_date, &round_or_square);
+   else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "psetting") == 0) psetting_c(command_data, clock_or_date, round_or_square);
    else if (strcmp(trim_extra_spaces(command_data), "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
    else if (strcmp(trim_extra_spaces(command_data), "uptime") == 0) uptime_c(info.uptime, additional_line);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "touch") == 0) touch_c(getcwd(NULL, 100), command_data);
