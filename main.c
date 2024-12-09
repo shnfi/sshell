@@ -42,14 +42,18 @@
 
 #define MAIN_LINE_BUFFER 250
 
-struct command
+typedef struct
 {
 	char data[MAX_COMMAND_LEN];
 	unsigned int *len;
-};
+} command;
 
 int main()
 {
+	/*
+	 * first display settings
+	 */
+	
 	initscr();
 	noecho();
 	raw();
@@ -76,7 +80,7 @@ int main()
 	 * declaring the 'command' object
 	 */
 
-	struct command command  = { "", malloc(MAX_COMMAND_LEN) };
+	command command  = { "", malloc(MAX_COMMAND_LEN) };
 
 	do
 	{
