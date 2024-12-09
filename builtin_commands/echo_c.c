@@ -14,10 +14,14 @@ void echo_c(char str[], int *al)
       
       char *x = malloc(12);
 
-      for (int i = 6; i < strlen(str); i++)
+      memset(x, 0, sizeof(x));
+
+      for (int i = 6; i < strlen(str) && str[i] != ' '; i++)
       {
          x[strlen(x)] = str[i];
       }
+
+      printf("%s\n", x);
 
       char *l_var = getenv(x);
 
