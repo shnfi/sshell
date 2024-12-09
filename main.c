@@ -35,6 +35,8 @@
 #include "builtin_commands/rm_c.c"
 #include "builtin_commands/echo_c.c"
 
+#include "command_identification.c"
+
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
 #define IS_CTRL_PRESSED(x) ((x) & 0x1f)
@@ -155,54 +157,7 @@ int main()
 				 * from the 'builtin_commands' folder
 				 */
 
-				if (strcmp(trim_extra_spaces(command.data), "help") == 0) help_c(USERNAME, additional_line);
-				else if (strcmp(trim_extra_spaces(command.data), "exit") == 0) exit_c(EXIT);
-				else if (strcmp(trim_extra_spaces(command.data), "clear") == 0) clear_c(line, command.data, command.len);
-				else if (strcmp(trim_extra_spaces(command.data), "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "saywithsmile") == 0) saywithsmile_c(command.data, additional_line);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "cd") == 0) cd_c(command.data);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "ls") == 0) ls_c(command.data, getcwd(NULL, 100), additional_line);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "psetting") == 0) psetting_c(command.data, &clock_or_date, &round_or_square);
-				else if (strcmp(trim_extra_spaces(command.data), "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
-				else if (strcmp(trim_extra_spaces(command.data), "uptime") == 0) uptime_c(info.uptime, additional_line);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "touch") == 0) touch_c(getcwd(NULL, 100), command.data);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "mkdir") == 0) mkdir_c(getcwd(NULL, 100), command.data);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "rm") == 0) rm_c(getcwd(NULL, 100), command.data);
-				else if (strcmp(called_command_finder(trim_extra_spaces(command.data)), "echo") == 0) echo_c(command.data, additional_line);
-				else
-				{
-					/*
-					 * running the entered command if it was not one of the specific 
-					 * commands that we checked in the last few lines 
-					 */
-
-					char *returning_output = malloc(MAIN_LINE_BUFFER);
-					FILE *output;
-				
-					output = popen(command.data, "r");
-		
-					if (output == NULL)
-					{
-						returning_output = "ERROR WHILE OPENING THE PIPE!";
-					}
-					else
-					{
-						printw("\n\n");
-	
-						while(fgets(returning_output, MAIN_LINE_BUFFER - 1, output))
-						{
-							/*
-							 * 'additional_line' variable's purpose is to know how many lines should be
-							 * added to the 'line' variable for each line of the command outupt
-							 */
-							
-							printw("%s", returning_output);
-							*additional_line += 1;
-						}
-					}
-
-					free(returning_output);
-				}
+				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, clock_or_date, round_or_square, MAIN_LINE_BUFFER, info);
 
 				/*
 				 * if command was not equal to '', this will add 2 lines for the better space between output and the next prompt
