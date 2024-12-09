@@ -157,7 +157,7 @@ int main()
 				 * from the 'builtin_commands' folder
 				 */
 
-				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, clock_or_date, round_or_square, MAIN_LINE_BUFFER, info);
+				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, &clock_or_date, &round_or_square, MAIN_LINE_BUFFER, info);
 
 				/*
 				 * if command was not equal to '', this will add 2 lines for the better space between output and the next prompt
