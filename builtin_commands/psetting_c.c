@@ -24,4 +24,10 @@ void psetting_c(char str[], char **c_or_d, char **r_or_s)
    {
       *r_or_s = "square";
    }
+
+   if (check_for_arg(str, "1") == 1)
+   {
+      *c_or_d = "-1";
+      *r_or_s = "-1";
+   }
 }
