@@ -123,6 +123,15 @@ int main()
 
 			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
 		}
+		else if (clock_or_date == "-1" && round_or_square == "-1")
+		{
+			/*
+			 * the type 1 prompt
+			 */
+
+			mvprintw(*line, 0, "%s> ", USERNAME);
+			mvprintw(*line, sizeof(USERNAME) + 4, "%s", command.data);
+		}
 		
 		int ch = getch();
 
@@ -147,7 +156,8 @@ int main()
 				 * this is a temporary handle for scrolling problem (content overflow problem) 
 				 */
 				
-				if (*line >= max.ws_row - 5) clear_c(line, command.data, command.len);
+				if (*line >= max.ws_row - 3) 
+					clear_c(line, command.data, command.len);
 
 				unsigned int *additional_line = malloc(sizeof(int));
 				*additional_line = 0;
@@ -189,6 +199,11 @@ int main()
 					{
 						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
 					}
+					else if (clock_or_date == "-1" && round_or_square == "-1")
+					{
+						mvdelch(*line, sizeof(USERNAME) + *command.len + 3);
+					}
+
 					command.data[*command.len-1] = 0;
 					*command.len -= 1;
 				}
