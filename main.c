@@ -89,6 +89,12 @@ int main()
 		time_t t = time(NULL);
   		struct tm tm = *localtime(&t);
 
+		if (round_or_square == "-1" && clock_or_date != "-1" || round_or_square != "-1" && clock_or_date == "-1")
+		{
+			round_or_square = "square";
+			clock_or_date = "date";
+		}
+
 		if (clock_or_date == "clock")
 		{
 			/*
