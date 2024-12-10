@@ -2,7 +2,7 @@ void command_identification(
    char command_data[], char USERNAME[], int *additional_line, bool *EXIT, int *line, int *command_len, char *clock_or_date[], char *round_or_square[], int MAIN_LINE_BUFFER, struct sysinfo info
    )
 {
-   if (strcmp(trim_extra_spaces(command_data), "help") == 0) help_c(USERNAME, additional_line);
+   if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "help") == 0) help_c(command_data, USERNAME, additional_line);
    else if (strcmp(trim_extra_spaces(command_data), "exit") == 0) exit_c(EXIT);
    else if (strcmp(trim_extra_spaces(command_data), "clear") == 0) clear_c(line, command_data, command_len);
    else if (strcmp(trim_extra_spaces(command_data), "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
