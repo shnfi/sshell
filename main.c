@@ -78,6 +78,9 @@ int main()
 	char *round_or_square = malloc(7);
 	round_or_square = "square";
 
+	char *prompt_type = malloc(3);
+	prompt_type = "-1"; /* prompt type == -1 means that the prompt is not using each of the custom themes */
+
 	/*
 	 * declaring the 'command' object
 	 */
@@ -129,7 +132,7 @@ int main()
 
 			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
 		}
-		else if (clock_or_date == "-1" && round_or_square == "-1")
+		else if (prompt_type == "1")
 		{
 			/*
 			 * the type 1 prompt
@@ -138,7 +141,7 @@ int main()
 			mvprintw(*line, 0, "%s> ", USERNAME);
 			mvprintw(*line, sizeof(USERNAME) + 4, "%s", command.data);
 		}
-		else if (clock_or_date == "-2" && round_or_square == "-2")
+		else if (prompt_type == "2")
 		{
 			/*
 			 * the type 2 prompt
@@ -182,7 +185,7 @@ int main()
 				 * from the 'builtin_commands' folder
 				 */
 
-				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, &clock_or_date, &round_or_square, MAIN_LINE_BUFFER, info);
+				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, &clock_or_date, &round_or_square, MAIN_LINE_BUFFER, info, &prompt_type);
 
 				/*
 				 * if command was not equal to '', this will add 2 lines for the better space between output and the next prompt
@@ -214,11 +217,11 @@ int main()
 					{
 						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
 					}
-					else if (clock_or_date == "-1" && round_or_square == "-1")
+					else if (prompt_type == "1")
 					{
 						mvdelch(*line, sizeof(USERNAME) + *command.len + 3);
 					}
-					else if (clock_or_date == "-2" && round_or_square == "-2")
+					else if (prompt_type == "2")
 					{
 						mvdelch(*line, *command.len + 1);
 					}
