@@ -30,4 +30,10 @@ void psetting_c(char str[], char **c_or_d, char **r_or_s)
       *c_or_d = "-1";
       *r_or_s = "-1";
    }
+
+   if (check_for_arg(str, "2") == 1)
+   {
+      *c_or_d = "-2";
+      *r_or_s = "-2";
+   }
 }
