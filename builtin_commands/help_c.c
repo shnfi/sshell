@@ -29,7 +29,13 @@ void help_c(char str[], char username[], int *al)
 	}
 	else if (strcmp(c, "psetting") == 0)
 	{
-		printw("Usage: psetting [setting]\nCustomizes your prompt.\n\n   -c         shows the clock on prompt\n   -d         shows the date on prompt\n   -s         uses square brackets for prompt\n   -r         uses round brackets for prompt\n   -1         changes the style of prompt to style 1\n   -2         changes the style of prompt to style 2\n");
+		printw("Usage: psetting [setting]\nCustomizes your prompt.\n\n");
+		printw("   -c         shows the clock on prompt\n");
+		printw("   -d         shows the date on prompt\n");
+		printw("   -s         uses square brackets for prompt\n");
+		printw("   -r         uses round brackets for prompt\n");
+		printw("   -1         changes the style of prompt to style 1: username>\n");
+		printw("   -2         changes the style of prompt to style 2: >\n");
 		*al += 9;
 	}
 }
