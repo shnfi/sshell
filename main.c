@@ -138,6 +138,15 @@ int main()
 			mvprintw(*line, 0, "%s> ", USERNAME);
 			mvprintw(*line, sizeof(USERNAME) + 4, "%s", command.data);
 		}
+		else if (clock_or_date == "-2" && round_or_square == "-2")
+		{
+			/*
+			 * the type 2 prompt
+			 */
+
+			mvprintw(*line, 0, "> ");
+			mvprintw(*line, 2, "%s", command.data);
+		}
 		
 		int ch = getch();
 
@@ -208,6 +217,10 @@ int main()
 					else if (clock_or_date == "-1" && round_or_square == "-1")
 					{
 						mvdelch(*line, sizeof(USERNAME) + *command.len + 3);
+					}
+					else if (clock_or_date == "-2" && round_or_square == "-2")
+					{
+						mvdelch(*line, *command.len + 1);
 					}
 
 					command.data[*command.len-1] = 0;
