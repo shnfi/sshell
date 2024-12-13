@@ -38,4 +38,9 @@ void help_c(char str[], char username[], int *al)
 		printw("   -2         changes the style of prompt to style 2: >\n");
 		*al += 9;
 	}
+	else if (strcmp(c, "search") == 0)
+	{
+		printw("Usage: search [value]\nSearches somethig trough the firefox for you.\n\n");
+		*al += 2;
+	}
 }
