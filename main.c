@@ -34,6 +34,7 @@
 #include "builtin_commands/mkdir_c.c"
 #include "builtin_commands/rm_c.c"
 #include "builtin_commands/echo_c.c"
+#include "builtin_commands/search_c.c"
 
 #include "command_identification.c"
 
