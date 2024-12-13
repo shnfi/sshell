@@ -17,6 +17,7 @@ void command_identification(
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "mkdir") == 0) mkdir_c(getcwd(NULL, 100), command_data);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "rm") == 0) rm_c(getcwd(NULL, 100), command_data);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "echo") == 0) echo_c(command_data, additional_line);
+   else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "search") == 0) search_c(command_data, line, command_len);
    else
    {
       /*
