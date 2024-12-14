@@ -17,9 +17,12 @@ void search_c(char str[], int *line, int *command_len)
       }
    }
 
-   sprintf(command, "firefox https://www.google.com/search?q=%s -safe-mode", val);
+   sprintf(command, "firefox 'https://www.google.com/search?client=ubuntu-sn&channel=fs&q=%s' -safe-mode", val);
 
    system(command);
 
    clear_c(line, str, command_len);
+
+   free(command);
+   free(val);
 }
