@@ -5,9 +5,11 @@ void rm_c(char cwd[], char str[])
 {
    bool ws_founded = false;
    char *arg = malloc(20);
+   char *re_arg = malloc(20);
    char *file_path = malloc(100);
 
    memset(arg, 0, sizeof(arg));
+   memset(re_arg, 0, sizeof(re_arg));
 
    file_path = cwd;
 
@@ -25,10 +27,17 @@ void rm_c(char cwd[], char str[])
       else break;
    }
 
-   strcat(file_path, arg);
+   for (int i = strlen(arg); i >= 0; i--)
+      re_arg[strlen(re_arg)] = arg[i];
+
+   printw("\n%s", arg);
+   printw("\n%s", re_arg);
+
+   strcat(file_path, re_arg);
 
    remove(file_path);
 
    free(arg);
+   free(re_arg);
    free(file_path);
 }
