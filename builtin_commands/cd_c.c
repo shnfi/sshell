@@ -5,21 +5,26 @@ void cd_c(char str[])
 {
    unsigned int ws_index;
    char *new_dir = malloc(30);
+   char *re_new_dir = malloc(30);
 
    memset(new_dir, 0, sizeof(new_dir));
 
-   for (int i = 0; i < strlen(str); i++)
+   int x = 0;
+
+   for (int i = strlen(str) - 1; i > 0; i--)
    {
-      if (str[i] == ' ')
+      if (str[i] != ' ')
       {
-         ws_index = i+1;
-         break;
+         new_dir[(strlen(str) - 1) - ((strlen(str) - 1) - x)] = str[i];
+         x++;
       }
+      else break;
    }
 
-   for (int i = ws_index; i < strlen(str); i++) new_dir[strlen(new_dir)] = str[i];
+   for (int i = strlen(new_dir); i >= 0; i--)
+      re_new_dir[strlen(re_new_dir)] = new_dir[i];
 
-   chdir(new_dir);
+   chdir(re_new_dir);
 
    free(new_dir);
 }
