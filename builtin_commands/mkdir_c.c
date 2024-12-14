@@ -8,6 +8,8 @@ void mkdir_c(char cwd[], char str[])
    char *arg = malloc(20);
    char *file_path = malloc(100);
 
+   memset(arg, 0, sizeof(arg));
+
    file_path = cwd;
 
    file_path[strlen(file_path)] = '/';
