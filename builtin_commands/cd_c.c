@@ -8,6 +8,7 @@ void cd_c(char str[])
    char *re_new_dir = malloc(30);
 
    memset(new_dir, 0, sizeof(new_dir));
+   memset(re_new_dir, 0, sizeof(re_new_dir));
 
    int x = 0;
 
