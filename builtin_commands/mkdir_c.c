@@ -14,11 +14,16 @@ void mkdir_c(char cwd[], char str[])
 
    file_path[strlen(file_path)] = '/';
 
-   for (int i = 0; i < strlen(str); i++)
-   {
-      if (str[i - 1] == ' ') ws_founded = true;
+   int x = 0;
 
-      if (ws_founded) arg[strlen(arg)] = str[i];
+   for (int i = strlen(str) - 1; i > 0; i--)
+   {
+      if (str[i] != ' ')
+      {
+         arg[(strlen(str) - 1) - ((strlen(str) - 1) - x)] = str[i];
+         x++;
+      }
+      else break;
    }
 
    strcat(file_path, arg);
