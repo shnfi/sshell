@@ -29,9 +29,6 @@ void touch_c(char cwd[], char str[])
    for (int i = strlen(arg); i >= 0; i--)
       re_arg[strlen(re_arg)] = arg[i];
 
-   printw("\n%s", arg);
-   printw("\n%s", re_arg);
-
    strcat(file_path, re_arg);
 
    FILE *f = fopen(file_path, "w");
