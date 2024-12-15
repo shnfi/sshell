@@ -4,7 +4,7 @@
 
 char *get_output(char command[])
 {
-	static char returning_output[GOWO_BUFFER];
+	char *returning_output = malloc(GOWO_BUFFER);
 	FILE *output;
 
 	memset(returning_output, 0, sizeof(returning_output));

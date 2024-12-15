@@ -41,7 +41,7 @@
 #define USERNAME get_output("whoami")
 #define MAX_COMMAND_LEN 500
 #define IS_CTRL_PRESSED(x) ((x) & 0x1f)
-#define CWD getcwd(NULL, 100)
+#define CWD getcwd(NULL, 250)
 
 #define MAIN_LINE_BUFFER 250
 
@@ -107,14 +107,14 @@ int main()
 
 			if (round_or_square == "round")
 			{
-				mvprintw(*line, 0, "(%02d:%02d:%02d)-(%s)-(%s)~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, 0, "(%02d:%02d:%02d)-(%s)-(%s)~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 250)), USERNAME);
 			}
 			else if (round_or_square == "square")
 			{
-				mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 250)), USERNAME);
 			}
 
-			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 250))) + 3, "%s", command.data);
 		}
 		else if (clock_or_date == "date")
 		{
@@ -124,14 +124,14 @@ int main()
 			
 			if (round_or_square == "round")
 			{
-				mvprintw(*line, 0, "(%d-%02d-%02d)-(%s)-(%s)~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, 0, "(%d-%02d-%02d)-(%s)-(%s)~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 250)), USERNAME);
 			}
 			else if (round_or_square == "square")
 			{
-				mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 100)), USERNAME);
+				mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 250)), USERNAME);
 			}
 
-			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 100))) + 3, "%s", command.data);
+			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 250))) + 3, "%s", command.data);
 		}
 		else if (prompt_type == "1")
 		{
@@ -212,11 +212,11 @@ int main()
 				{
 					if (clock_or_date == "clock")
 					{
-						mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
+						mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 3);
 					}
 					else if (clock_or_date == "date")
 					{
-						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 100))) + 3);
+						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 3);
 					}
 					else if (prompt_type == "1")
 					{
