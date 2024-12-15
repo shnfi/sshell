@@ -21,7 +21,7 @@ void rm_c(char cwd[], char str[])
    {
       if (str[i] != ' ')
       {
-         arg[(strlen(str) - 1) - ((strlen(str) - 1) - x)] = str[i];
+         arg[x] = str[i];
          x++;
       }
       else break;
@@ -33,6 +33,9 @@ void rm_c(char cwd[], char str[])
    strcat(file_path, re_arg);
 
    remove(file_path);
+
+   re_arg = NULL;
+   file_path = NULL;
 
    free(arg);
    free(re_arg);
