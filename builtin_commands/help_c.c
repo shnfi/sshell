@@ -43,4 +43,14 @@ void help_c(char str[], char username[], int *al)
 		printw("Usage: search [value]\nSearches somethig trough the firefox for you.\n\n");
 		*al += 2;
 	}
+	else if (strcmp(c, "sizeof") == 0)
+	{
+		printw("Usage: sizeof [file_name]\nDisplays the size of the file in bytes.\n\n");
+		*al += 2;
+	}
+	else
+	{
+		printw(" * Entered command does not existed!");
+		*al += 1;
+	}
 }
