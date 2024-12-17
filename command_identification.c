@@ -9,7 +9,7 @@ void command_identification(
    else if (strcmp(trim_extra_spaces(command_data), "cd") == 0) { chdir("/home/"); chdir(USERNAME); } /* navigating to the home directory shortcut */
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "saywithsmile") == 0) saywithsmile_c(command_data, additional_line);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "cd") == 0) cd_c(command_data);
-   // else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "ls") == 0) ls_c(command_data, getcwd(NULL, 100), additional_line);
+   else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "ls") == 0) ls_c(command_data, getcwd(NULL, 100), additional_line);
    else if (strcmp(called_command_finder(trim_extra_spaces(command_data)), "psetting") == 0) psetting_c(command_data, clock_or_date, round_or_square, prompt_type);
    else if (strcmp(trim_extra_spaces(command_data), "pwd") == 0) pwd_c(getcwd(NULL, 100), additional_line);
    else if (strcmp(trim_extra_spaces(command_data), "uptime") == 0) uptime_c(info.uptime, additional_line);
