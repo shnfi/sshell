@@ -40,6 +40,11 @@ void sizeof_c(char str[], int *al)
       return;
    }
 
+   if (f_size == 9223372036854775807)
+   {
+      f_size = 4096;
+   }
+
    printw("%ld bytes", f_size);
 
    *al += 1;
