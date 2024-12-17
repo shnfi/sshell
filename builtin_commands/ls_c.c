@@ -29,50 +29,10 @@ void ls_c(char str[], char cwd[], int *al)
        * preparing the size of each file 
        */
 
-      FILE *file = fopen(d->d_name, "r");
-      long file_size;
-
-      if (file != NULL) {
-         fseek(file, 0, SEEK_END);
-         file_size = ftell(file);
-
-         /*
-          * for directories, '.' (current directory) and '..' (parent directory) it shows
-          * the 9223372036854775807 number as the size, this line will handle this bug and shows the real size of them
-          */
-
-         if (file_size == 9223372036854775807) file_size = 4096;
-
-         fclose(file);
-         file = NULL;
-         free(file);
-      }
-      else break;
-
-      /*
-       * listing the directories 
-       */
-
-      if (check_for_arg(str, "n") == 1)
+      if (d->d_name[0] != '.')
       {
-         if (d->d_name[0] != '.')
-         {
-            printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
+         printw("[ %c ] %s\n", symbol, d->d_name);
             *al += 1;
-         }
-      }
-      else if (check_for_arg(str, "a") == 1)
-      {
-         printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
-         *al += 1;
-      }
-      else
-      {
-         if (d->d_name[0] != '.')
-         {
-            printw("[ %c ]  [ %10ld B ]  %s\n", symbol, file_size, d->d_name);
-            *al += 1;
-         }
       }
 
       d = readdir(path);
@@ -81,7 +41,7 @@ void ls_c(char str[], char cwd[], int *al)
       {
          free(path);
          free(d);
-         free(file);
+         // free(file);
 
          return;
       }
