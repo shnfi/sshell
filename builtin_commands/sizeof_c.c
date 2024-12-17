@@ -33,6 +33,12 @@ void sizeof_c(char str[], int *al)
       f_size = ftell(f);
       fclose(f);
    }
+   else
+   {
+      printw(" * The file does not existed!");
+      *al += 1;
+      return;
+   }
 
    printw("%ld bytes", f_size);
 
