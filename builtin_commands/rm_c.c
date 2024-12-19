@@ -32,7 +32,8 @@ void rm_c(char cwd[], char str[])
 
    strcat(file_path, re_arg);
 
-   remove(file_path);
+   if (!remove(file_path))
+      rmdir(file_path);
 
    re_arg = NULL;
    file_path = NULL;
