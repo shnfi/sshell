@@ -107,13 +107,10 @@ int main()
 			 */
 
 			if (round_or_square == "round")
-			{
 				mvprintw(*line, 0, "(%02d:%02d:%02d)-(%s)-(%s)~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 250)), USERNAME);
-			}
+
 			else if (round_or_square == "square")
-			{
 				mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 250)), USERNAME);
-			}
 
 			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 250))) + 3, "%s", command.data);
 		}
@@ -124,13 +121,10 @@ int main()
 			 */
 			
 			if (round_or_square == "round")
-			{
 				mvprintw(*line, 0, "(%d-%02d-%02d)-(%s)-(%s)~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 250)), USERNAME);
-			}
+
 			else if (round_or_square == "square")
-			{
 				mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 250)), USERNAME);
-			}
 
 			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 250))) + 3, "%s", command.data);
 		}
@@ -193,7 +187,8 @@ int main()
 				 * if command was not equal to '', this will add 2 lines for the better space between output and the next prompt
 				 */
 
-				if (*command.len != 0) *line += 2;
+				if (*command.len != 0)
+					*line += 2;
 
 				/*
 				 * resetting command struct and adding to the 'line' variable cuz user goes down one row
@@ -212,21 +207,17 @@ int main()
 				if (*command.len > 0)
 				{
 					if (clock_or_date == "clock")
-					{
 						mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 3);
-					}
+
 					else if (clock_or_date == "date")
-					{
 						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 3);
-					}
+
 					else if (prompt_type == "1")
-					{
 						mvdelch(*line, sizeof(USERNAME) + *command.len + 3);
-					}
+
 					else if (prompt_type == "2")
-					{
 						mvdelch(*line, *command.len + 1);
-					}
+
 
 					command.data[*command.len-1] = 0;
 					*command.len -= 1;
