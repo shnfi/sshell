@@ -13,8 +13,14 @@ void help_c(char str[], char username[], int *al)
 
 	if (strlen(c) == 0)
 	{
-		printw(" * Please use the 'help help' command to find the 'help' command's syntax.");
+		attron(COLOR_PAIR(6));
+
+		printw(" [ALERT] Please use the 'help help' command to find the 'help' command's syntax.");
 		*al += 1;
+
+		attroff(COLOR_PAIR(6));
+
+		return;
 	}
 
 	if (strcmp(c, "help") == 0)

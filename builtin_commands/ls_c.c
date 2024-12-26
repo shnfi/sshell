@@ -20,8 +20,13 @@ void ls_c(char str[], char cwd[], int *al)
 
    if (strcmp(validate_output, "okay") != 0)
    {
-      printw(" * Invalid options used: %s\n", validate_output);
+		attron(COLOR_PAIR(3));
+
+      printw(" [ERROR] Invalid options used: %s\n", validate_output);
       *al += 1;
+
+		attroff(COLOR_PAIR(3));
+
       return;
    }
 

@@ -15,8 +15,13 @@ void psetting_c(char str[], char **c_or_d, char **r_or_s, char **prompt_type, in
 
    if (strcmp(validate_output, "okay") != 0)
    {
-      printw(" * Invalid options used: %s\n", validate_output);
+		attron(COLOR_PAIR(3));
+
+      printw(" [ERROR] Invalid options used: %s\n", validate_output);
       *al += 1;
+
+		attroff(COLOR_PAIR(3));
+
       return;
    }
 

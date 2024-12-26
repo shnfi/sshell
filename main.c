@@ -89,7 +89,7 @@ int main()
 	{
 		attron(COLOR_PAIR(3));
 
-		printw("\n * Your terminal does not support colors!");
+		printw("\n [ERROR] Your terminal does not support colors!");
 		*line += 3;
 
 		attroff(COLOR_PAIR(3));
@@ -113,7 +113,7 @@ int main()
 
 	attron(COLOR_PAIR(6));
 
-	printw("\n + Current color pair: 1");
+	printw("\n [ALERT] Current color pair: 1");
 	*line += 3;
 
 	attroff(COLOR_PAIR(6));
