@@ -1,5 +1,6 @@
 # Sshell
-a simple shell written in C :)
+a cool shell written in C :) <br>
+\* i removed the 'simple' word cuz i think its a bit cool now ! :)
 
 ## purpose ?
 just learning new things and trying to be active! (trying to make it better every commit)
