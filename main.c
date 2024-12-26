@@ -81,6 +81,16 @@ int main()
 	*EXIT = false;
 
 	/*
+	 * checking if terminal supports colors
+	 */
+
+	if (!has_colors() || !can_change_color())
+	{
+		printw("\n * Your terminal does not support colors!");
+		*line += 3;
+	}
+
+	/*
 	 * prompt customization variables 
 	 */
 
