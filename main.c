@@ -111,12 +111,12 @@ int main()
 	int *using_color_index = malloc(sizeof(int));
 	*using_color_index = 1;
 
-	attron(COLOR_PAIR(6));
+	attron(COLOR_PAIR(4));
 
-	printw("\n [ALERT] Current color pair: 1");
+	printw("\n [INFO] Current color pair: 1");
 	*line += 3;
 
-	attroff(COLOR_PAIR(6));
+	attroff(COLOR_PAIR(4));
 
 	/*
 	 * declaring the 'command' object
