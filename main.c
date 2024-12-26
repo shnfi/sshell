@@ -299,6 +299,10 @@ int main()
 	free(line);
 	free(EXIT);
 
+	/*
+	 * turns the attribute off and end the window
+	 */
+
 	attroff(COLOR_PAIR(using_color_index));
 	endwin();
 
