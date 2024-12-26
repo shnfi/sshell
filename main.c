@@ -64,6 +64,15 @@ int main()
 	raw();
 	scrollok(stdscr, true);
 	keypad(stdscr, true);
+	start_color();
+
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_BLUE, COLOR_BLACK);
+	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(5, COLOR_YELLOW, COLOR_BLACK);
+
+	wbkgd(stdscr, COLOR_PAIR(1));
 
 	unsigned int *line = malloc(500);
 	*line = 0;
@@ -83,6 +92,9 @@ int main()
 
 	char *prompt_type = malloc(3);
 	prompt_type = "-1"; /* prompt type == -1 means that the prompt is not using each of the custom themes */
+
+	int *using_color_index = malloc(sizeof(int));
+	*using_color_index = 1;
 
 	/*
 	 * declaring the 'command' object
@@ -182,7 +194,7 @@ int main()
 				 * from the 'builtin_commands' folder
 				 */
 
-				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, &clock_or_date, &round_or_square, MAIN_LINE_BUFFER, info, &prompt_type);
+				command_identification(command.data, USERNAME, additional_line, EXIT, line, command.len, &clock_or_date, &round_or_square, MAIN_LINE_BUFFER, info, &prompt_type, using_color_index);
 
 				/*
 				 * if command was not equal to '', this will add 2 lines for the better space between output and the next prompt
@@ -277,6 +289,7 @@ int main()
 	free(line);
 	free(EXIT);
 
+	attroff(COLOR_PAIR(using_color_index));
 	endwin();
 
 	return 0;
