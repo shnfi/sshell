@@ -7,7 +7,7 @@ char *option_validation(char str[], char *valid_options[], int valid_options_siz
 
 void psetting_c(char str[], char **c_or_d, char **r_or_s, char **prompt_type, int *al, int *using_color_index)
 {
-   char *valid_options[11] = { "c", "d", "r", "s", "1", "2", "g", "r", "b", "m", "y" };
+   char *valid_options[12] = { "c", "d", "r", "s", "1", "2", "w", "g", "r", "b", "m", "y" };
 
    char *validate_output = option_validation(str, valid_options, sizeof(valid_options) / sizeof(valid_options[0]));
 
@@ -58,33 +58,39 @@ void psetting_c(char str[], char **c_or_d, char **r_or_s, char **prompt_type, in
       *prompt_type = "2";
    }
 
-   if (check_for_arg(str, "g") == 1)
+   if (check_for_arg(str, "w") == 1)
    {
       attron(COLOR_PAIR(1));
       *using_color_index = 1;
    }
 
-   if (check_for_arg(str, "r") == 1)
+   if (check_for_arg(str, "g") == 1)
    {
       attron(COLOR_PAIR(2));
+      *using_color_index = 1;
+   }
+
+   if (check_for_arg(str, "r") == 1)
+   {
+      attron(COLOR_PAIR(3));
       *using_color_index = 2;
    }
 
    if (check_for_arg(str, "b") == 1)
    {
-      attron(COLOR_PAIR(3));
+      attron(COLOR_PAIR(4));
       *using_color_index = 3;
    }
 
    if (check_for_arg(str, "m") == 1)
    {
-      attron(COLOR_PAIR(4));
+      attron(COLOR_PAIR(5));
       *using_color_index = 4;
    }
 
    if (check_for_arg(str, "y") == 1)
    {
-      attron(COLOR_PAIR(5));
+      attron(COLOR_PAIR(6));
       *using_color_index = 5;
    }
 }
