@@ -66,11 +66,12 @@ int main()
 	keypad(stdscr, true);
 	start_color();
 
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
-	init_pair(3, COLOR_BLUE, COLOR_BLACK);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(5, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(1, COLOR_WHITE, COLOR_BLACK);
+	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_RED, COLOR_BLACK);
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);
+	init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(6, COLOR_YELLOW, COLOR_BLACK);
 
 	wbkgd(stdscr, COLOR_PAIR(1));
 
@@ -86,8 +87,12 @@ int main()
 
 	if (!has_colors() || !can_change_color())
 	{
+		attron(COLOR_PAIR(3));
+
 		printw("\n * Your terminal does not support colors!");
 		*line += 3;
+
+		attroff(COLOR_PAIR(3));
 	}
 
 	/*
@@ -105,6 +110,13 @@ int main()
 
 	int *using_color_index = malloc(sizeof(int));
 	*using_color_index = 1;
+
+	attron(COLOR_PAIR(6));
+
+	printw("\n + Current color pair: 1");
+	*line += 3;
+
+	attroff(COLOR_PAIR(6));
 
 	/*
 	 * declaring the 'command' object
