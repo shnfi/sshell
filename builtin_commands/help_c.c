@@ -42,12 +42,12 @@ void help_c(char str[], char username[], int *al)
 		printw("   -r         uses round brackets for prompt\n");
 		printw("   -1         changes the style of prompt to style 1: username>\n");
 		printw("   -2         changes the style of prompt to style 2: >\n");
-		printw("   -w         uses the white theme\n");
-		printw("   -g         uses the green theme\n");
-		printw("   -r         uses the red theme\n");
-		printw("   -b         uses the blue theme\n");
-		printw("   -m         uses the magenta theme\n");
-		printw("   -y         uses the yellow theme\n");
+		printw("   -w         (white) uses the white theme\n");
+		printw("   -g         (green) uses the green theme\n");
+		printw("   -t         (tomato) uses the red theme\n");
+		printw("   -b         (blue) uses the blue theme\n");
+		printw("   -m         (magenta) uses the magenta theme\n");
+		printw("   -y         (yellow) uses the yellow theme\n");
 		*al += 15;
 	}
 	else if (strcmp(c, "search") == 0)
