@@ -5,34 +5,35 @@ char *option_validation(char str[], char *valid_options[], int valid_options_siz
    memset(args_string, 0, sizeof(args_string));
 
    int occupied_lines;
-   int index_of_dashes[5];
+
+   int index_of_dash;
    int x = 0;
 
    for (int i = 0; i < strlen(str); i++)
    {
       if (str[i] == '-')
       {
-         index_of_dashes[x] = i;
+         index_of_dash = i;
          x++;
+         break;
       }
-      else continue;
    }
 
-   for (int i = 0; i < x; i++)
+   for (int i = index_of_dash; i < strlen(str); i++)
    {
-      for (int j = index_of_dashes[i]; j < strlen(str); j++)
+      if (str[i] != ' ')
       {
-         if (str[j] != ' ')
-         {
-            args_string[strlen(args_string)] = str[j];
-         }
+         args_string[strlen(args_string)] = str[i];
       }
+      else
+         break;
    }
 
    /*
     * checking for invalid options
     */
 
+   printw("'%s'", args_string); // debug line , delete me later
    if (x > 0)
    {
       bool er = false;
