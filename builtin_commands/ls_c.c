@@ -18,6 +18,8 @@ void ls_c(char str[], char cwd[], int *al)
 
    char *dir_name = malloc(50);
 
+   memset(dir_name, 0, sizeof(dir_name));
+
    /*
     * the 'last_option_index' is setted to the 2 because the first whitespace is between
     * the 'ls' and the '-' 
@@ -50,17 +52,21 @@ void ls_c(char str[], char cwd[], int *al)
          index_of_dashes[x] = i;
          x++;
       }
-      else continue;
+      else
+         continue;
    }
 
-   for (int i = index_of_dashes[(sizeof(index_of_dashes) / sizeof(index_of_dashes[0])) - 1]; i < strlen(str); i++)
+   if (x > 0)
    {
-      if (str[i] == ' ')
+      for (int i = index_of_dashes[(sizeof(index_of_dashes) / sizeof(index_of_dashes[0])) - 1]; i < strlen(str); i++)
       {
-         if (last_option_index != i)
+         if (str[i] == ' ')
          {
-            last_option_index = i;
-            break;
+            if (last_option_index != i)
+            {
+               last_option_index = i;
+               break;
+            }
          }
       }
    }
@@ -81,7 +87,21 @@ void ls_c(char str[], char cwd[], int *al)
    if (strlen(dir_name) == 0)
       path = opendir(cwd);
    else
+   {
       path = opendir(dir_name);
+
+      if (path == NULL)
+      {
+         attron(COLOR_PAIR(3));
+
+         printw(" [ERROR] This directory does not existed!");
+         *al += 1;
+
+         attroff(COLOR_PAIR(3));
+
+         return;
+      }
+   }
 
    struct dirent *d = readdir(path);
 
@@ -93,10 +113,14 @@ void ls_c(char str[], char cwd[], int *al)
        * checking the type of the file in the directory and setting the symbol for listing it
        */
 
-      if (d->d_type == DT_DIR) symbol = 'D';
-      else if (d->d_type == DT_REG) symbol = 'F';
-      else if (d->d_type == DT_UNKNOWN) symbol = '?';
-      else symbol = 'X';
+      if (d->d_type == DT_DIR)
+         symbol = 'D';
+      else if (d->d_type == DT_REG)
+         symbol = 'F';
+      else if (d->d_type == DT_UNKNOWN)
+         symbol = '?';
+      else
+         symbol = 'X';
 
       /*
        * preparing the size of each file 
