@@ -13,7 +13,7 @@ void ls_c(char str[], char cwd[], int *al)
 
    char *validate_output = option_validation(str, valid_options, sizeof(valid_options) / sizeof(valid_options[0]));
 
-   int index_of_dashes[5];
+   int index_of_dash;
    int x = 0;
 
    char *dir_name = malloc(50);
@@ -49,7 +49,7 @@ void ls_c(char str[], char cwd[], int *al)
    {
       if (str[i] == '-')
       {
-         index_of_dashes[x] = i;
+         index_of_dash = i;
          x++;
       }
       else
@@ -58,7 +58,7 @@ void ls_c(char str[], char cwd[], int *al)
 
    if (x > 0)
    {
-      for (int i = index_of_dashes[(sizeof(index_of_dashes) / sizeof(index_of_dashes[0])) - 1]; i < strlen(str); i++)
+      for (int i = index_of_dash; i < strlen(str); i++)
       {
          if (str[i] == ' ')
          {
@@ -92,14 +92,25 @@ void ls_c(char str[], char cwd[], int *al)
 
       if (path == NULL)
       {
-         attron(COLOR_PAIR(3));
+         if (x != 0)
+         {
+            /*
+             * here, we realise that the 'dir_name' that we got, is accually those options that user just used
+             */
 
-         printw(" [ERROR] This directory does not existed!");
-         *al += 1;
+            path = opendir(cwd);
+         }
+         else
+         {
+            attron(COLOR_PAIR(3));
 
-         attroff(COLOR_PAIR(3));
+            printw(" [ERROR] This directory does not existed!");
+            *al += 1;
 
-         return;
+            attroff(COLOR_PAIR(3));
+
+            return;
+         }
       }
    }
 
