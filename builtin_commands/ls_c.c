@@ -9,12 +9,21 @@ int check_for_arg(char str[], char arg[]);
 
 void ls_c(char str[], char cwd[], int *al)
 {
-   DIR *path = opendir(cwd);
-   struct dirent *d = readdir(path);
-
    char *valid_options[5] = { "l", "t", "r", "h", "a" };
 
    char *validate_output = option_validation(str, valid_options, sizeof(valid_options) / sizeof(valid_options[0]));
+
+   int index_of_dashes[5];
+   int x = 0;
+
+   char *dir_name = malloc(50);
+
+   /*
+    * the 'last_option_index' is setted to the 2 because the first whitespace is between
+    * the 'ls' and the '-' 
+    */
+
+   int last_option_index = 2;
 
    printw("\n\n");
 
@@ -30,37 +39,119 @@ void ls_c(char str[], char cwd[], int *al)
       return;
    }
 
-   while (d != NULL)
+   /*
+    * this two 'for' loops are for getting the index of the white space that end to the options
+    */
+
+   for (int i = 0; i < strlen(str); i++)
    {
-      char symbol;
-
-      /*
-       * checking the type of the file in the directory and setting the symbol for listing it
-       */
-
-      if (d->d_type == DT_DIR) symbol = 'D';
-      else if (d->d_type == DT_REG) symbol = 'F';
-      else if (d->d_type == DT_UNKNOWN) symbol = '?';
-      else symbol = 'X';
-
-      /*
-       * preparing the size of each file 
-       */
-
-      if (d->d_name[0] != '.')
+      if (str[i] == '-')
       {
-         printw("[ %c ] %s\n", symbol, d->d_name);
-         *al += 1;
+         index_of_dashes[x] = i;
+         x++;
       }
+      else continue;
+   }
 
-      d = readdir(path);
-
-      if ((char *) d == NULL) 
+   for (int i = index_of_dashes[(sizeof(index_of_dashes) / sizeof(index_of_dashes[0])) - 1]; i < strlen(str); i++)
+   {
+      if (str[i] == ' ')
       {
-         free(path);
-         free(d);
+         if (last_option_index != i)
+         {
+            last_option_index = i;
+            break;
+         }
+      }
+   }
 
-         return;
+   /*
+    * now trying to get the directory name
+    */
+
+   for (int i = last_option_index + 1; i < strlen(str); i++)
+      dir_name[strlen(dir_name)] = str[i];
+
+   /*
+    * at the end the main directory listing task..
+    */
+
+   if (strlen(dir_name) == 0)
+   {
+      DIR *path = opendir(cwd);
+      struct dirent *d = readdir(path);
+
+      while (d != NULL)
+      {
+         char symbol;
+
+         /*
+          * checking the type of the file in the directory and setting the symbol for listing it
+          */
+
+         if (d->d_type == DT_DIR) symbol = 'D';
+         else if (d->d_type == DT_REG) symbol = 'F';
+         else if (d->d_type == DT_UNKNOWN) symbol = '?';
+         else symbol = 'X';
+
+         /*
+          * preparing the size of each file 
+          */
+
+         if (d->d_name[0] != '.')
+         {
+            printw("[ %c ] %s\n", symbol, d->d_name);
+            *al += 1;
+         }
+
+         d = readdir(path);
+
+         if ((char *) d == NULL) 
+         {
+            free(path);
+            free(d);
+
+            return;
+         }
+      }
+   }
+   else
+   {
+      DIR *path = opendir(dir_name);
+      struct dirent *d = readdir(path);
+
+      while (d != NULL)
+      {
+         char symbol;
+
+         /*
+          * checking the type of the file in the directory and setting the symbol for listing it
+          */
+
+         if (d->d_type == DT_DIR) symbol = 'D';
+         else if (d->d_type == DT_REG) symbol = 'F';
+         else if (d->d_type == DT_UNKNOWN) symbol = '?';
+         else symbol = 'X';
+
+         /*
+          * preparing the size of each file 
+          */
+
+         if (d->d_name[0] != '.')
+         {
+            printw("[ %c ] %s\n", symbol, d->d_name);
+            *al += 1;
+         }
+
+         d = readdir(path);
+
+         if ((char *) d == NULL) 
+         {
+            free(path);
+            free(d);
+
+            return;
+         }
       }
    }
 }
