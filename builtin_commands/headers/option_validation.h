@@ -33,7 +33,6 @@ char *option_validation(char str[], char *valid_options[], int valid_options_siz
     * checking for invalid options
     */
 
-   printw("'%s'", args_string); // debug line , delete me later
    if (x > 0)
    {
       bool er = false;
