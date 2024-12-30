@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void cd_c(char str[])
+void cd_c(char str[], int *al, int *using_color_index)
 {
    unsigned int ws_index;
    char *new_dir = malloc(30);
@@ -11,6 +11,8 @@ void cd_c(char str[])
    memset(re_new_dir, 0, sizeof(re_new_dir));
 
    int x = 0;
+
+   printw("\n\n");
 
    for (int i = strlen(str) - 1; i > 0; i--)
    {
@@ -25,7 +27,20 @@ void cd_c(char str[])
    for (int i = strlen(new_dir); i >= 0; i--)
       re_new_dir[strlen(re_new_dir)] = new_dir[i];
 
-   chdir(re_new_dir);
+   if (chdir(re_new_dir) == -1)
+   {
+      attron(COLOR_PAIR(3));
+
+      printw(" [ERROR] This directory does not existed!");
+      *al += 1;
+
+      attroff(COLOR_PAIR(3));
+      attron(COLOR_PAIR(*using_color_index));
+
+      free(new_dir);
+
+      return;
+   }
 
    free(new_dir);
 }

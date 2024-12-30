@@ -2,7 +2,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-void mkdir_c(char cwd[], char str[])
+void mkdir_c(char cwd[], char str[], int *al, int *using_color_index)
 {
    bool ws_founded = false;
    char *arg = malloc(20);
@@ -17,6 +17,8 @@ void mkdir_c(char cwd[], char str[])
    file_path[strlen(file_path)] = '/';
 
    int x = 0;
+
+   printw("\n\n");
 
    for (int i = strlen(str) - 1; i > 0; i--)
    {
@@ -33,12 +35,23 @@ void mkdir_c(char cwd[], char str[])
 
    strcat(file_path, re_arg);
 
-   mkdir(file_path, 0755);
+   if (mkdir(file_path, 0755) == -1)
+   {
+      attron(COLOR_PAIR(3));
 
-   re_arg = NULL;
-   file_path = NULL;
+      printw(" [ERROR] Cannot create this directory!");
+      *al += 1;
 
-   free(arg);
-   free(re_arg);
-   free(file_path);
+      attroff(COLOR_PAIR(3));
+      attron(COLOR_PAIR(*using_color_index));
+
+      re_arg = NULL;
+      file_path = NULL;
+
+      free(arg);
+      free(re_arg);
+      free(file_path);
+
+      return;
+   }
 }

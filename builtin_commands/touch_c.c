@@ -1,6 +1,6 @@
 #include <string.h>
 
-void touch_c(char cwd[], char str[])
+void touch_c(char cwd[], char str[], int *al, int *using_color_index)
 {
    bool ws_founded = false;
    char *arg = malloc(20);
@@ -15,6 +15,8 @@ void touch_c(char cwd[], char str[])
    file_path[strlen(file_path)] = '/';
 
    int x = 0;
+
+   printw("\n\n");
 
    for (int i = strlen(str) - 1; i > 0; i--)
    {
@@ -33,10 +35,23 @@ void touch_c(char cwd[], char str[])
 
    FILE *f = fopen(file_path, "w");
 
-   re_arg = NULL;
-   file_path = NULL;
+   if (!f)
+   {
+      attron(COLOR_PAIR(3));
 
-   free(arg);
-   free(re_arg);
-   free(file_path);
+      printw(" [ERROR] Cannot create this file!");
+      *al += 1;
+
+      attroff(COLOR_PAIR(3));
+      attron(COLOR_PAIR(*using_color_index));
+
+      re_arg = NULL;
+      file_path = NULL;
+
+      free(arg);
+      free(re_arg);
+      free(file_path);
+
+      return;
+   }
 }

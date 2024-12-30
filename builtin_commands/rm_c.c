@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void rm_c(char cwd[], char str[])
+void rm_c(char cwd[], char str[], int *al, int *using_color_index)
 {
    bool ws_founded = false;
    char *arg = malloc(20);
@@ -16,6 +16,8 @@ void rm_c(char cwd[], char str[])
    file_path[strlen(file_path)] = '/';
 
    int x = 0;
+
+   printw("\n\n");
 
    for (int i = strlen(str) - 1; i > 0; i--)
    {
@@ -32,13 +34,29 @@ void rm_c(char cwd[], char str[])
 
    strcat(file_path, re_arg);
 
-   if (!remove(file_path))
-      rmdir(file_path);
+   // if (!remove(file_path))
+   //    rmdir(file_path);
 
-   re_arg = NULL;
-   file_path = NULL;
+   if (remove(file_path) == -1)
+   {
+      if (rmdir(file_path) == -1)
+      {
+         attron(COLOR_PAIR(3));
 
-   free(arg);
-   free(re_arg);
-   free(file_path);
+         printw(" [ERROR] This file/directory does not existed!");
+         *al += 1;
+
+         attroff(COLOR_PAIR(3));
+         attron(COLOR_PAIR(*using_color_index));
+
+         re_arg = NULL;
+         file_path = NULL;
+
+         free(arg);
+         free(re_arg);
+         free(file_path);
+
+         return;
+      }
+   }
 }
