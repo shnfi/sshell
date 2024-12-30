@@ -318,5 +318,7 @@ int main()
 	attroff(COLOR_PAIR(using_color_index));
 	endwin();
 
+	free(using_color_index);
+
 	return 0;
 }
