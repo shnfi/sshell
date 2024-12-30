@@ -36,7 +36,8 @@ void ls_c(char str[], char cwd[], int *al, int *using_color_index)
       printw(" [ERROR] Invalid options used: %s\n", validate_output);
       *al += 1;
 
-		attroff(COLOR_PAIR(*using_color_index));
+      attroff(COLOR_PAIR(3));
+		attron(COLOR_PAIR(*using_color_index));
 
       return;
    }
