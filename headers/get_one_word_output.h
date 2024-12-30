@@ -13,13 +13,6 @@ char *get_output(char command[])
 
 	if (output == NULL)
 	{
-		attron(COLOR_PAIR(3));
-
-		printw(" [ERROR] Error while opening the pipe.");
-		*al += 1;
-
-		attroff(COLOR_PAIR(3));
-
 		return "ERROR";
 	}
 	else
