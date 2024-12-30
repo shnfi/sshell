@@ -31,7 +31,14 @@ void echo_c(char str[], int *al)
       }
       else
       {
-         printw(" * This local variable not existed!");
+         attron(COLOR_PAIR(3));
+
+         printw(" [ERROR] This local variable does not existed.");
+         *al += 1;
+
+         attroff(COLOR_PAIR(3));
+
+         return;
       }
 
       free(x);

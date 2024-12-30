@@ -35,8 +35,13 @@ void sizeof_c(char str[], int *al)
    }
    else
    {
-      printw(" * The file does not existed!");
+      attron(COLOR_PAIR(3));
+
+      printw(" [ERROR] The file does not existed.");
       *al += 1;
+
+      attroff(COLOR_PAIR(3));
+
       return;
    }
 

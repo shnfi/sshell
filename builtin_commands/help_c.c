@@ -62,7 +62,13 @@ void help_c(char str[], char username[], int *al)
 	}
 	else
 	{
-		printw(" * Entered command does not existed!");
+		attron(COLOR_PAIR(3));
+
+		printw(" [ERROR] Entered command does not existed.");
 		*al += 1;
+
+		attroff(COLOR_PAIR(3));
+
+		return;
 	}
 }
