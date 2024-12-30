@@ -33,7 +33,14 @@ void command_identification(
 
       if (output == NULL)
       {
-         returning_output = "ERROR WHILE OPENING THE PIPE!";
+         attron(COLOR_PAIR(3));
+
+         printw(" [ERROR] Error while opening the pipe.");
+         *al += 1;
+
+         attroff(COLOR_PAIR(3));
+
+         return "ERROR";
       }
       else
       {
