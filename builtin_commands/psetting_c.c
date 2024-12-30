@@ -21,6 +21,7 @@ void psetting_c(char str[], char **c_or_d, char **r_or_s, char **prompt_type, in
       *al += 1;
 
 		attroff(COLOR_PAIR(3));
+      attron(COLOR_PAIR(*using_color_index));
 
       return;
    }
@@ -72,30 +73,30 @@ void psetting_c(char str[], char **c_or_d, char **r_or_s, char **prompt_type, in
    if (check_for_arg(str, "g") == 1)
    {
       attron(COLOR_PAIR(2));
-      *using_color_index = 1;
+      *using_color_index = 2;
    }
 
    if (check_for_arg(str, "t") == 1)
    {
       attron(COLOR_PAIR(3));
-      *using_color_index = 2;
+      *using_color_index = 3;
    }
 
    if (check_for_arg(str, "b") == 1)
    {
       attron(COLOR_PAIR(4));
-      *using_color_index = 3;
+      *using_color_index = 4;
    }
 
    if (check_for_arg(str, "m") == 1)
    {
       attron(COLOR_PAIR(5));
-      *using_color_index = 4;
+      *using_color_index = 5;
    }
 
    if (check_for_arg(str, "y") == 1)
    {
       attron(COLOR_PAIR(6));
-      *using_color_index = 5;
+      *using_color_index = 6;
    }
 }

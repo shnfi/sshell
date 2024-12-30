@@ -7,7 +7,7 @@
 
 int check_for_arg(char str[], char arg[]);
 
-void ls_c(char str[], char cwd[], int *al)
+void ls_c(char str[], char cwd[], int *al, int *using_color_index)
 {
    char *valid_options[5] = { "l", "t", "r", "h", "a" };
 
@@ -36,7 +36,7 @@ void ls_c(char str[], char cwd[], int *al)
       printw(" [ERROR] Invalid options used: %s\n", validate_output);
       *al += 1;
 
-		attroff(COLOR_PAIR(3));
+		attroff(COLOR_PAIR(*using_color_index));
 
       return;
    }
@@ -108,6 +108,7 @@ void ls_c(char str[], char cwd[], int *al)
             *al += 1;
 
             attroff(COLOR_PAIR(3));
+            attron(COLOR_PAIR(*using_color_index));
 
             return;
          }

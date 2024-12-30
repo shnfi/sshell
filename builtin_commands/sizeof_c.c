@@ -1,4 +1,4 @@
-void sizeof_c(char str[], int *al)
+void sizeof_c(char str[], int *al, int *using_color_index)
 {
    char *arg = malloc(25);
    char *re_arg = malloc(25);
@@ -41,6 +41,7 @@ void sizeof_c(char str[], int *al)
       *al += 1;
 
       attroff(COLOR_PAIR(3));
+      attron(COLOR_PAIR(*using_color_index));
 
       return;
    }

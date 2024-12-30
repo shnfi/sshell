@@ -1,6 +1,6 @@
 #include <string.h>
 
-void help_c(char str[], char username[], int *al)
+void help_c(char str[], char username[], int *al, int *using_color_index)
 {
 	printw("\n\n");
 
@@ -18,7 +18,7 @@ void help_c(char str[], char username[], int *al)
 		printw(" [ALERT] Please use the 'help help' command to find the 'help' command's syntax.");
 		*al += 1;
 
-		attroff(COLOR_PAIR(6));
+		attroff(COLOR_PAIR(*using_color_index));
 
 		return;
 	}
@@ -68,6 +68,7 @@ void help_c(char str[], char username[], int *al)
 		*al += 1;
 
 		attroff(COLOR_PAIR(3));
+        attron(COLOR_PAIR(*using_color_index));
 
 		return;
 	}

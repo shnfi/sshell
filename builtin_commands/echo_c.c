@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void echo_c(char str[], int *al)
+void echo_c(char str[], int *al, int *using_color_index)
 {
    printw("\n\n");
 
@@ -21,8 +21,6 @@ void echo_c(char str[], int *al)
          x[strlen(x)] = str[i];
       }
 
-      printf("%s\n", x);
-
       char *l_var = getenv(x);
 
       if (l_var != NULL)
@@ -37,6 +35,7 @@ void echo_c(char str[], int *al)
          *al += 1;
 
          attroff(COLOR_PAIR(3));
+         attron(COLOR_PAIR(*using_color_index));
 
          return;
       }
