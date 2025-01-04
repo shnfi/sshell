@@ -8,13 +8,10 @@ void search_c(char str[], int *line, int *command_len)
    for (int i = 7; i < strlen(str); i++)
    {
       if (str[i] != ' ')
-      {
          val[strlen(val)] = str[i];
-      }
+
       else 
-      {
          val[strlen(val)] = '+';
-      }
    }
 
    sprintf(command, "firefox 'https://www.google.com/search?client=ubuntu-sn&channel=fs&q=%s' -safe-mode", val);

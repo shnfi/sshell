@@ -7,9 +7,7 @@ void help_c(char str[], char username[], int *al, int *using_color_index)
 	char *c = malloc(15);
 
 	for (int i = 5; i < strlen(str) && str[i] != ' '; i++)
-	{
 		c[strlen(c)] = str[i];
-	}
 
 	if (strlen(c) == 0)
 	{

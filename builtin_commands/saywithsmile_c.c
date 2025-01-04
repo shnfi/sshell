@@ -16,15 +16,18 @@ void saywithsmile_c(char str[], int *al)
 
    printw("\n\n");
 
-   for (int i = 0; i < (strlen(str) - index_of_whitespace) + 1; i++) printw("-");
+   for (int i = 0; i < (strlen(str) - index_of_whitespace) + 1; i++)
+      printw("-");
 
    printw("\n");
 
-   for (int i = index_of_whitespace; i < strlen(str); i++)  printw("%c", str[i]);
+   for (int i = index_of_whitespace; i < strlen(str); i++)
+      printw("%c", str[i]);
 
    printw("\n");
    
-   for (int i = 0; i < (strlen(str) - index_of_whitespace) + 1; i++) printw("-");
+   for (int i = 0; i < (strlen(str) - index_of_whitespace) + 1; i++)
+      printw("-");
    
    printw("\n");
 

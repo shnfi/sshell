@@ -17,9 +17,7 @@ void echo_c(char str[], int *al, int *using_color_index)
       memset(x, 0, sizeof(x));
 
       for (int i = 6; i < strlen(str) && str[i] != ' '; i++)
-      {
          x[strlen(x)] = str[i];
-      }
 
       char *l_var = getenv(x);
 
