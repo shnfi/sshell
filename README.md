@@ -17,7 +17,10 @@ and then run the `sshell` file .
 
 <br>OR..<br><br>
 
-just use the `compile.sh` file . <br>
+just use the `compile.sh` file .
+```bash
+chmod +x compile.sh && ./compile.sh
+```
 and then run the `sshell` file .
 ```bash
 ./sshell
