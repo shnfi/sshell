@@ -3,12 +3,12 @@
 void touch_c(char cwd[], char str[], int *al, int *using_color_index)
 {
    bool ws_founded = false;
-   char *arg = malloc(20);
-   char *re_arg = malloc(20);
+   char *arg = malloc(30);
+   char *re_arg = malloc(30);
    char *file_path = malloc(100);
 
-   memset(arg, 0, sizeof(arg));
-   memset(re_arg, 0, sizeof(re_arg));
+   memset(arg, 0, 30);
+   memset(re_arg, 0, 30);
 
    file_path = cwd;
 
