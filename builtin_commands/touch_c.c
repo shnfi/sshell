@@ -33,9 +33,10 @@ void touch_c(char cwd[], char str[], int *al, int *using_color_index)
 
    strcat(file_path, re_arg);
 
-   FILE *f = fopen(file_path, "w");
+   FILE *f_creation;
+   FILE *f_check_for_existence = fopen(file_path, "r");
 
-   if (!f)
+   if (f_check_for_existence != 0)
    {
       attron(COLOR_PAIR(3));
 
@@ -54,4 +55,6 @@ void touch_c(char cwd[], char str[], int *al, int *using_color_index)
 
       return;
    }
+   else 
+      f_creation = fopen(file_path, "w");
 }
