@@ -151,7 +151,7 @@ int main()
 			else if (round_or_square == "square")
 				mvprintw(*line, 0, "[%02d:%02d:%02d]-[%s]-[%s]~> ", tm.tm_hour, tm.tm_min, tm.tm_sec, current_dir_name(getcwd(NULL, 250)), USERNAME);
 
-			mvprintw(*line, sizeof(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 250))) + 3, "%s", command.data);
+			mvprintw(*line, strlen(USERNAME) + 18 + strlen(current_dir_name(getcwd(NULL, 250))) + 1, "%s", command.data);
 		}
 		else if (clock_or_date == "date")
 		{
@@ -165,7 +165,7 @@ int main()
 			else if (round_or_square == "square")
 				mvprintw(*line, 0, "[%d-%02d-%02d]-[%s]-[%s]~> ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, current_dir_name(getcwd(NULL, 250)), USERNAME);
 
-			mvprintw(*line, sizeof(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 250))) + 3, "%s", command.data);
+			mvprintw(*line, strlen(USERNAME) + 20 + strlen(current_dir_name(getcwd(NULL, 250))) + 1, "%s", command.data);
 		}
 		else if (prompt_type == "1")
 		{
@@ -174,7 +174,7 @@ int main()
 			 */
 
 			mvprintw(*line, 0, "%s> ", USERNAME);
-			mvprintw(*line, sizeof(USERNAME) + 4, "%s", command.data);
+			mvprintw(*line, strlen(USERNAME) + 1, "%s", command.data);
 		}
 		else if (prompt_type == "2")
 		{
@@ -246,13 +246,13 @@ int main()
 				if (*command.len > 0)
 				{
 					if (clock_or_date == "clock")
-						mvdelch(*line, sizeof(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 3);
+						mvdelch(*line, strlen(USERNAME) + 18 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 1);
 
 					else if (clock_or_date == "date")
-						mvdelch(*line, sizeof(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 3);
+						mvdelch(*line, strlen(USERNAME) + 20 + *command.len - 1 + strlen(current_dir_name(getcwd(NULL, 250))) + 1);
 
 					else if (prompt_type == "1")
-						mvdelch(*line, sizeof(USERNAME) + *command.len + 3);
+						mvdelch(*line, strlen(USERNAME) + *command.len + 1);
 
 					else if (prompt_type == "2")
 						mvdelch(*line, *command.len + 1);
