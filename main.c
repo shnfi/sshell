@@ -3,7 +3,8 @@
  * project first released at Dec 22, 2024
  *
  * sshell
- * Copyright (C) shnfi
+ * Copyright (C) 2024 shnfi
+ * Permission is hereby granted, free of charge, to any person obtaining a copy...
  */
 
 #include <stdio.h>
