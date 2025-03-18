@@ -2,8 +2,8 @@
  * project started at Oct 27, 2024
  * project first released at Dec 22, 2024
  *
- * there is no such cool thing in it (maybe it is), but the main goal is
- * to learn new things about operating system and have fun ! 
+ * sshell
+ * Copyright (C) shnfi
  */
 
 #include <stdio.h>
