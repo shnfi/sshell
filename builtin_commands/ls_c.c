@@ -18,7 +18,7 @@ void ls_c(char str[], char cwd[], int *al, int *using_color_index)
 
    char *dir_name = malloc(50);
 
-   memset(dir_name, 0, sizeof(dir_name));
+   memset(dir_name, 0, 50);
 
    /*
     * the 'last_option_index' is setted to the 2 because the first whitespace is between

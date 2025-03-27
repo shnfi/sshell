@@ -1,11 +1,12 @@
 void sizeof_c(char str[], int *al, int *using_color_index)
 {
-   char *arg = malloc(25);
-   char *re_arg = malloc(25);
-   char *f_name = malloc(25);
+   char *arg = malloc(50);
+   char *re_arg = malloc(50);
+   char *f_name = malloc(50);
 
-   memset(arg, 0, sizeof(arg));
-   memset(re_arg, 0, sizeof(re_arg));
+   memset(arg, 0, 50);
+   memset(re_arg, 0, 50);
+   memset(f_name, 0, 50);
 
    printw("\n\n");
 
@@ -47,11 +48,13 @@ void sizeof_c(char str[], int *al, int *using_color_index)
    }
 
    if (f_size == 9223372036854775807)
-   {
       f_size = 4096;
-   }
 
    printw("%ld bytes", f_size);
 
    *al += 1;
+
+   free(arg);
+   free(re_arg);
+   free(f_name);
 }

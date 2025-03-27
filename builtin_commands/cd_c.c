@@ -4,11 +4,11 @@
 void cd_c(char str[], int *al, int *using_color_index)
 {
    unsigned int ws_index;
-   char *new_dir = malloc(30);
-   char *re_new_dir = malloc(30);
+   char *new_dir = malloc(50);
+   char *re_new_dir = malloc(50);
 
-   memset(new_dir, 0, sizeof(new_dir));
-   memset(re_new_dir, 0, sizeof(re_new_dir));
+   memset(new_dir, 0, 50);
+   memset(re_new_dir, 0, 50);
 
    int x = 0;
 
@@ -37,10 +37,18 @@ void cd_c(char str[], int *al, int *using_color_index)
       attroff(COLOR_PAIR(3));
       attron(COLOR_PAIR(*using_color_index));
 
+      new_dir = NULL;
+      re_new_dir = NULL;
+
       free(new_dir);
+      free(re_new_dir)
 
       return;
    }
 
+   new_dir = NULL;
+   re_new_dir = NULL;
+
    free(new_dir);
+   free(re_new_dir)
 }
