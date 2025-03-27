@@ -5,14 +5,15 @@
 void mkdir_c(char cwd[], char str[], int *al, int *using_color_index)
 {
    bool ws_founded = false;
-   char *arg = malloc(30);
-   char *re_arg = malloc(30);
-   char *file_path = malloc(100);
+   char *arg = malloc(50);
+   char *re_arg = malloc(50);
+   char *file_path = malloc(1024);
 
-   memset(arg, 0, 30);
-   memset(re_arg, 0, 30);
+   memset(arg, 0, 50);
+   memset(re_arg, 0, 50);
+   memset(file_path, 0, 1024);
 
-   file_path = cwd;
+   strcpy(file_path, cwd);
 
    file_path[strlen(file_path)] = '/';
 
@@ -45,6 +46,7 @@ void mkdir_c(char cwd[], char str[], int *al, int *using_color_index)
       attroff(COLOR_PAIR(3));
       attron(COLOR_PAIR(*using_color_index));
 
+      arg = NULL;
       re_arg = NULL;
       file_path = NULL;
 
