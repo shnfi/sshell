@@ -41,7 +41,7 @@ void cd_c(char str[], int *al, int *using_color_index)
       re_new_dir = NULL;
 
       free(new_dir);
-      free(re_new_dir)
+      free(re_new_dir);
 
       return;
    }
@@ -50,5 +50,5 @@ void cd_c(char str[], int *al, int *using_color_index)
    re_new_dir = NULL;
 
    free(new_dir);
-   free(re_new_dir)
+   free(re_new_dir);
 }
